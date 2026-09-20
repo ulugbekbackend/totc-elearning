@@ -1,0 +1,26 @@
+node_modules
+dist
+shots
+.DS_Store
+*.local
+
+.env
+.env.local
+.env.production
+*.pem
+*.key
+secrets/
+
+docs/
+CLAUDE.local.md
+.claude/
+
+# siqishdan oldingi asl rasmlar (faqat lokalda)
+_totc_old_images/
+_old-images/
+
+# yordamchi skriptlar (faqat lokalda: Figmadan rasm olish, siqish, skrinshot)
+scripts/
+
+# ishlatilmayotgan SVG placeholderlar (faqat lokalda)
+public/placeholder/
