@@ -1,0 +1,338 @@
+[
+  {
+    "key": "news1",
+    "file": "/figma/news1.png",
+    "layer": "Rectangle 32",
+    "path": "Document / Page 1 / Landing / Lastest News and Resources / Group 50 / Group 40 / Rectangle 32",
+    "w": 640,
+    "h": 340
+  },
+  {
+    "key": "news2",
+    "file": "/figma/news2.png",
+    "layer": "Rectangle 33",
+    "path": "Document / Page 1 / Landing / Lastest News and Resources / Group 47 / Rectangle 33",
+    "w": 280,
+    "h": 200
+  },
+  {
+    "key": "news3",
+    "file": "/figma/news3.png",
+    "layer": "Rectangle 34",
+    "path": "Document / Page 1 / Landing / Lastest News and Resources / Group 48 / Group 42 / Rectangle 34",
+    "w": 280,
+    "h": 200
+  },
+  {
+    "key": "news4",
+    "file": "/figma/news4.png",
+    "layer": "Rectangle 37",
+    "path": "Document / Page 1 / Landing / Lastest News and Resources / Group 49 / Group 43 / Rectangle 37",
+    "w": 280,
+    "h": 200
+  },
+  {
+    "key": "testimonialWoman",
+    "file": "/figma/testimonialWoman.jpg",
+    "layer": "smiling-woman-with-afro-posing-pink-sweater 1",
+    "path": "Document / Page 1 / Landing / Testimonials / Mask Group / smiling-woman-with-afro-posing-pink-sweater 1",
+    "w": 1052,
+    "h": 702
+  },
+  {
+    "key": "teacherMain",
+    "file": "/figma/teacherMain.jpg",
+    "layer": "portrait-teacher-giving-online-class 1",
+    "path": "Document / Page 1 / Landing / Our Features / Group 83 / Group 71 / Group 57 / Mask Group / portrait-teacher-giving-online-class 1",
+    "w": 339,
+    "h": 227
+  },
+  {
+    "key": "student1",
+    "file": "/figma/student1.png",
+    "layer": "image 8",
+    "path": "Document / Page 1 / Landing / Our Features / Group 83 / Group 71 / Group 64 / Mask Group / image 8",
+    "w": 250,
+    "h": 195
+  },
+  {
+    "key": "student2",
+    "file": "/figma/student2.png",
+    "layer": "image 7",
+    "path": "Document / Page 1 / Landing / Our Features / Group 83 / Group 71 / Group 63 / Mask Group / image 7",
+    "w": 193,
+    "h": 158
+  },
+  {
+    "key": "student3",
+    "file": "/figma/student3.png",
+    "layer": "image 11",
+    "path": "Document / Page 1 / Landing / Our Features / Group 83 / Group 71 / Group 65 / Mask Group / image 11",
+    "w": 166,
+    "h": 250
+  },
+  {
+    "key": "student4",
+    "file": "/figma/student4.png",
+    "layer": "image 10",
+    "path": "Document / Page 1 / Landing / Our Features / Group 83 / Group 71 / Group 66 / Mask Group / image 10",
+    "w": 341,
+    "h": 341
+  },
+  {
+    "key": "heroGirl",
+    "file": "/figma/heroGirl.png",
+    "layer": "image 12",
+    "path": "Document / Page 1 / Landing / Our Features / Group 123 / Group 122 / image 12",
+    "w": 396,
+    "h": 611
+  },
+  {
+    "key": "quizPhoto",
+    "file": "/figma/quizPhoto.png",
+    "layer": "image 13",
+    "path": "Document / Page 1 / Landing / Our Features / Group 93 / Group 92 / Mask Group / image 13",
+    "w": 462,
+    "h": 259
+  },
+  {
+    "key": "classroomVideo",
+    "file": "/figma/classroomVideo.jpg",
+    "layer": "confident-teacher-explaining-lesson-pupils 1",
+    "path": "Document / Page 1 / Landing / You Can Do With TOTC / Group 17 / confident-teacher-explaining-lesson-pupils 1",
+    "w": 705,
+    "h": 471
+  },
+  {
+    "key": "forInstructors",
+    "file": "/figma/forInstructors.png",
+    "layer": "Rectangle 19",
+    "path": "Document / Page 1 / Landing / What Is TOTC / Group 22 / Rectangle 19",
+    "w": 600,
+    "h": 400
+  },
+  {
+    "key": "forStudents",
+    "file": "/figma/forStudents.png",
+    "layer": "Rectangle 21",
+    "path": "Document / Page 1 / Landing / What Is TOTC / Group 23 / Rectangle 21",
+    "w": 600,
+    "h": 400
+  },
+  {
+    "key": "heroAvatar",
+    "file": "/figma/heroAvatar.jpg",
+    "layer": "Ellipse",
+    "path": "Document / Page 1 / Landing / Header / Group 452 / Group 451 / Group 13 / Ellipse",
+    "w": 56,
+    "h": 56
+  },
+  {
+    "key": "shelfDetail1",
+    "file": "/figma/shelfDetail1.png",
+    "layer": "Detail",
+    "path": "Document / Page 1 / Landing / Explore Course / Category / Detail",
+    "w": 685,
+    "h": 430
+  },
+  {
+    "key": "shelfDetail2",
+    "file": "/figma/shelfDetail2.png",
+    "layer": "   ",
+    "path": "Document / Page 1 / Landing / Explore Course / Category /    ",
+    "w": 685,
+    "h": 430
+  },
+  {
+    "key": "shelfDetail3",
+    "file": "/figma/shelfDetail3.png",
+    "layer": "Detail",
+    "path": "Document / Page 1 / Landing / Explore Course / Category / Detail",
+    "w": 685,
+    "h": 430
+  },
+  {
+    "key": "authSide",
+    "file": "/figma/authSide.jpg",
+    "layer": "Rectangle 77",
+    "path": "Document / Page 1 / Login / Group 231 / Rectangle 77",
+    "w": 737,
+    "h": 825
+  },
+  {
+    "key": "authRegister",
+    "file": "/figma/authRegister.jpg",
+    "layer": "Rectangle 77",
+    "path": "Document / Page 1 / Register / Group 231 / Rectangle 77",
+    "w": 731,
+    "h": 825
+  },
+  {
+    "key": "blogHero",
+    "file": "/figma/blogHero.jpg",
+    "layer": "Rectangle 77",
+    "path": "Document / Page 1 / Blog detail / Group 236 / Rectangle 77",
+    "w": 1920,
+    "h": 652
+  },
+  {
+    "key": "blog1",
+    "file": "/figma/blog1.png",
+    "layer": "Rectangle 34",
+    "path": "Document / Page 1 / Blog page / Group 271 / Group 270 / Group 252 / Group 236 / Group 43 / Rectangle 34",
+    "w": 356,
+    "h": 327
+  },
+  {
+    "key": "blog2",
+    "file": "/figma/blog2.jpg",
+    "layer": "Rectangle 34",
+    "path": "Document / Page 1 / Blog page / Group 271 / Group 270 / Group 251 / Group 236 / Group 43 / Rectangle 34",
+    "w": 356,
+    "h": 327
+  },
+  {
+    "key": "blog3",
+    "file": "/figma/blog3.jpg",
+    "layer": "Rectangle 34",
+    "path": "Document / Page 1 / Blog page / Group 271 / Group 270 / Group 250 / Group 236 / Group 43 / Rectangle 34",
+    "w": 356,
+    "h": 327
+  },
+  {
+    "key": "course1",
+    "file": "/figma/course1.jpg",
+    "layer": "Rectangle 32",
+    "path": "Document / Page 1 / Course Detail / Group 440 / Group 272 / Group 266 / Group 264 / Group 258 / Group 256 / Group 245 / Group 50 / Group 40 / Rectangle 32",
+    "w": 334,
+    "h": 239
+  },
+  {
+    "key": "course2",
+    "file": "/figma/course2.jpg",
+    "layer": "Rectangle 32",
+    "path": "Document / Page 1 / Course / Group 279 / Group 278 / Group 277 / Group 275 / Group 245 / Group 50 / Group 40 / Rectangle 32",
+    "w": 486,
+    "h": 258
+  },
+  {
+    "key": "payPaypal",
+    "file": "/figma/payPaypal.png",
+    "layer": "Paypal",
+    "path": "Document / Page 1 / Checkout page / Group 307 / Paypal",
+    "w": 85,
+    "h": 85
+  },
+  {
+    "key": "payAmex",
+    "file": "/figma/payAmex.jpg",
+    "layer": "am_amex_06 1",
+    "path": "Document / Page 1 / Checkout page / am_amex_06 1",
+    "w": 160,
+    "h": 92
+  },
+  {
+    "key": "payVisa",
+    "file": "/figma/payVisa.png",
+    "layer": "download 1",
+    "path": "Document / Page 1 / Checkout page / download 1",
+    "w": 167,
+    "h": 92
+  },
+  {
+    "key": "course3",
+    "file": "/figma/course3.jpg",
+    "layer": "Rectangle 32",
+    "path": "Document / Page 1 / Course Full View / Group 272 / Group 266 / Group 264 / Group 258 / Group 256 / Group 245 / Group 50 / Group 40 / Rectangle 32",
+    "w": 334,
+    "h": 239
+  },
+  {
+    "key": "course4",
+    "file": "/figma/course4.jpg",
+    "layer": "Rectangle 32",
+    "path": "Document / Page 1 / Course Full View / Group 272 / Group 266 / Group 265 / Group 258 / Group 256 / Group 245 / Group 50 / Group 40 / Rectangle 32",
+    "w": 334,
+    "h": 239
+  },
+  {
+    "key": "course5",
+    "file": "/figma/course5.jpg",
+    "layer": "Rectangle 32",
+    "path": "Document / Page 1 / Search / Group 357 / Group 358 / Group 272 / Group 266 / Group 263 / Group 258 / Group 256 / Group 245 / Group 50 / Group 40 / Rectangle 32",
+    "w": 334,
+    "h": 239
+  },
+  {
+    "key": "course6",
+    "file": "/figma/course6.jpg",
+    "layer": "Rectangle 32",
+    "path": "Document / Page 1 / Search / Group 357 / Group 358 / Group 272 / Group 266 / Group 265 / Group 258 / Group 256 / Group 245 / Group 50 / Group 40 / Rectangle 32",
+    "w": 334,
+    "h": 239
+  },
+  {
+    "key": "course7",
+    "file": "/figma/course7.jpg",
+    "layer": "Rectangle 32",
+    "path": "Document / Page 1 / Search / Group 367 / Group 353 / Group 349 / Group 258 / Group 256 / Group 245 / Group 50 / Group 40 / Rectangle 32",
+    "w": 334,
+    "h": 239
+  },
+  {
+    "key": "course8",
+    "file": "/figma/course8.jpg",
+    "layer": "Rectangle 32",
+    "path": "Document / Page 1 / Search / Group 367 / Group 353 / Group 347 / Group 258 / Group 256 / Group 245 / Group 50 / Group 40 / Rectangle 32",
+    "w": 334,
+    "h": 239
+  },
+  {
+    "key": "literatureHero",
+    "file": "/figma/literatureHero.jpg",
+    "layer": "Rectangle 193",
+    "path": "Document / Page 1 / Literature course / Rectangle 193",
+    "w": 1679,
+    "h": 415
+  },
+  {
+    "key": "book1",
+    "file": "/figma/book1.jpg",
+    "layer": "Rectangle 196",
+    "path": "Document / Page 1 / Literature course / Group 406 / Group 405 / Group 402 / Group 400 / Group 387 / Group 386 / Rectangle 196",
+    "w": 451,
+    "h": 519
+  },
+  {
+    "key": "book2",
+    "file": "/figma/book2.jpg",
+    "layer": "Rectangle 196",
+    "path": "Document / Page 1 / Literature course / Group 406 / Group 405 / Group 402 / Group 400 / Group 388 / Group 386 / Rectangle 196",
+    "w": 451,
+    "h": 519
+  },
+  {
+    "key": "book3",
+    "file": "/figma/book3.jpg",
+    "layer": "Rectangle 196",
+    "path": "Document / Page 1 / Literature course / Group 406 / Group 405 / Group 402 / Group 400 / Group 389 / Group 386 / Rectangle 196",
+    "w": 451,
+    "h": 519
+  },
+  {
+    "key": "book4",
+    "file": "/figma/book4.jpg",
+    "layer": "Rectangle 196",
+    "path": "Document / Page 1 / Literature course / Group 406 / Group 405 / Group 402 / Group 401 / Group 390 / Group 386 / Rectangle 196",
+    "w": 451,
+    "h": 519
+  },
+  {
+    "key": "book5",
+    "file": "/figma/book5.png",
+    "layer": "Rectangle 196",
+    "path": "Document / Page 1 / Literature course / Group 406 / Group 405 / Group 402 / Group 401 / Group 391 / Group 386 / Rectangle 196",
+    "w": 451,
+    "h": 519
+  }
+]

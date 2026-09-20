@@ -1,0 +1,61 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+  }
+  body {
+    @apply font-sans text-body antialiased bg-white;
+  }
+  h1, h2, h3, h4, h5 {
+    @apply text-navy-title font-semibold;
+  }
+}
+
+@layer components {
+  .shell {
+    @apply mx-auto w-full max-w-shell px-5 sm:px-8;
+  }
+  .btn {
+    @apply inline-flex items-center justify-center gap-2 rounded-pill font-medium
+           transition-all duration-200 focus:outline-none focus-visible:ring-4
+           focus-visible:ring-teal/30 disabled:opacity-50 disabled:cursor-not-allowed;
+  }
+  .btn-primary {
+    @apply btn bg-teal text-white hover:bg-teal-dark shadow-[0_8px_24px_rgba(73,187,189,0.35)];
+  }
+  .btn-ghost {
+    @apply btn bg-white text-navy hover:bg-cloud;
+  }
+  .btn-outline {
+    @apply btn border-2 border-teal text-teal hover:bg-teal hover:text-white;
+  }
+  .btn-glass {
+    @apply btn bg-white/25 text-white hover:bg-white/40 backdrop-blur-sm;
+  }
+  .btn-sm { @apply px-5 py-2.5 text-sm; }
+  .btn-md { @apply px-7 py-3 text-base; }
+  .btn-lg { @apply px-9 py-4 text-lg; }
+
+  .field {
+    @apply w-full rounded-soft border border-line bg-white px-5 py-3.5 text-navy
+           placeholder:text-lilac outline-none transition
+           focus:border-teal focus:ring-4 focus:ring-teal/15;
+  }
+  .card-soft {
+    @apply rounded-card bg-white shadow-card;
+  }
+  .eyebrow {
+    @apply text-sm font-semibold uppercase tracking-[0.18em] text-teal;
+  }
+}
+
+/* Figmadagi hero to'lqini */
+.wave-bottom {
+  clip-path: ellipse(75% 100% at 50% 0%);
+}
+
+.no-scrollbar::-webkit-scrollbar { display: none; }
+.no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
