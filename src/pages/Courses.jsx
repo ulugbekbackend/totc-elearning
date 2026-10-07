@@ -1,136 +1,107 @@
-import { useMemo, useState } from 'react';
 import { Link } from 'react-router-dom';
-import { courses, courseCategories, bookShelves } from '../data/content.js';
-import { CourseCard, BookCard, PageHero, SectionHeading } from '../components/ui.jsx';
-import { IconSearch, IconPalette, IconGlobe, IconRibbon } from '../components/Icons.jsx';
+import { courseProgress, topCategories, courseRows } from '../data/content.js';
+import { CardRow, ProgressCard, CategoryCard, CourseTile, RowHeader } from '../components/CourseBlocks.jsx';
 
-const shelfIcons = { palette: IconPalette, globe: IconGlobe, ribbon: IconRibbon };
+/**
+ * Figma "Course" (47:247, 1920 kadr). fhd: da bo'limlar balandligi va chekinishlari 1:1:
+ * navbar ostidan — Welcome (785) · Top category · Recommended (1022) · Choice + banner +
+ * Personal development · Student are viewing (946) · Footer.
+ */
+const frame = 'shell fhd:max-w-[1920px] fhd:px-0';
+const titleCls = 'text-2xl font-semibold leading-[1.5] text-navy sm:text-3xl fhd:text-4xl fhd:leading-[54px]';
 
-export default function Courses() {
-  const [cat, setCat] = useState('All');
-  const [q, setQ] = useState('');
-  const [sort, setSort] = useState('popular');
-
-  const list = useMemo(() => {
-    let out = courses.filter((c) => (cat === 'All' || c.category === cat));
-    if (q.trim()) {
-      const needle = q.toLowerCase();
-      out = out.filter(
-        (c) => c.title.toLowerCase().includes(needle) || c.excerpt.toLowerCase().includes(needle)
-      );
-    }
-    if (sort === 'price') out = [...out].sort((a, b) => a.price - b.price);
-    if (sort === 'rating') out = [...out].sort((a, b) => b.rating - a.rating);
-    if (sort === 'popular') out = [...out].sort((a, b) => b.reviews - a.reviews);
-    return out;
-  }, [cat, q, sort]);
-
+function CourseRow({ row, arrows }) {
   return (
     <>
-      <PageHero
-        title="Find the course that fits your term"
-        subtitle="Everything from first-year foundations to specialist electives — taught live, recorded for later."
-        crumbs={[{ label: 'Home', to: '/' }, { label: 'Courses' }]}
-      >
-        <div className="flex w-full max-w-2xl items-center gap-3 rounded-pill bg-white p-2 shadow-float">
-          <span className="pl-4 text-lilac">
-            <IconSearch className="h-5 w-5" />
-          </span>
-          <input
-            value={q}
-            onChange={(e) => setQ(e.target.value)}
-            placeholder="Search courses, topics or instructors"
-            className="min-w-0 flex-1 bg-transparent py-2.5 text-navy outline-none placeholder:text-lilac"
-          />
-          <Link to="/search" className="btn-primary btn-sm shrink-0 px-7">
-            Search
-          </Link>
-        </div>
-      </PageHero>
-
-      <section className="shell py-14 lg:py-20">
-        {/* Filtrlar */}
-        <div className="flex flex-col gap-5 border-b border-line pb-6 lg:flex-row lg:items-center lg:justify-between">
-          <div className="no-scrollbar -mx-5 flex gap-2 overflow-x-auto px-5 lg:mx-0 lg:flex-wrap lg:px-0">
-            {courseCategories.map((c) => (
-              <button
-                key={c}
-                onClick={() => setCat(c)}
-                className={`shrink-0 rounded-pill px-6 py-2.5 text-sm font-medium transition ${
-                  cat === c ? 'bg-teal text-white' : 'bg-cloud text-body hover:bg-teal/10 hover:text-teal'
-                }`}
-              >
-                {c}
-              </button>
-            ))}
-          </div>
-
-          <div className="flex items-center gap-3">
-            <span className="shrink-0 text-sm text-body">Sort by</span>
-            <select
-              value={sort}
-              onChange={(e) => setSort(e.target.value)}
-              className="rounded-soft border border-line bg-white px-4 py-2.5 text-sm text-navy outline-none focus:border-teal"
-            >
-              <option value="popular">Most popular</option>
-              <option value="rating">Highest rated</option>
-              <option value="price">Lowest price</option>
-            </select>
-          </div>
-        </div>
-
-        <p className="mt-6 text-body">
-          <span className="font-semibold text-navy">{list.length}</span> ta kurs topildi
-        </p>
-
-        <div className="mt-8 grid gap-7 sm:grid-cols-2 lg:grid-cols-3">
-          {list.map((c) => (
-            <CourseCard key={c.slug} course={c} />
+      <RowHeader title={row.title} />
+      <div className="mt-8 fhd:mt-[50px]">
+        <CardRow arrows={arrows}>
+          {row.courses.map((c, i) => (
+            <CourseTile key={i} course={c} />
           ))}
-        </div>
+        </CardRow>
+      </div>
+    </>
+  );
+}
 
-        {list.length === 0 && (
-          <div className="rounded-card bg-cloud py-20 text-center">
-            <p className="text-lg font-medium text-navy">Hech narsa topilmadi</p>
-            <p className="mt-2 text-body">Boshqa kalit so'z yoki kategoriya bilan urinib ko'ring.</p>
+export default function Courses() {
+  return (
+    <>
+      {/* ---------- Welcome back ---------- */}
+      <section className="bg-sky/20 py-12 lg:py-16 fhd:h-[785px] fhd:pb-0 fhd:pt-[50px]">
+        <div className={`${frame} fhd:pl-[120px] fhd:pr-[113px]`}>
+          <div className="flex flex-wrap items-start justify-between gap-x-6 gap-y-2">
+            <h1 className={titleCls}>Welcome back, ready for your next lesson?</h1>
+            <Link
+              to="/search"
+              className="text-base font-bold leading-[30px] text-teal transition hover:text-teal-dark sm:mt-2 fhd:mr-[7px] fhd:mt-[18px] fhd:text-xl"
+            >
+              View hisotry
+            </Link>
           </div>
-        )}
+          <div className="mt-8 fhd:mt-[50px]">
+            <CardRow arrows>
+              {courseProgress.map((c) => (
+                <ProgressCard key={c.slug} course={c} />
+              ))}
+            </CardRow>
+          </div>
+        </div>
       </section>
 
-      {/* Kitob javonlari */}
-      <section className="bg-cloud/60 py-16 lg:py-24">
-        <div className="shell">
-          <SectionHeading
-            align="left"
-            eyebrow="Reading lists"
-            title="Browse our shelves"
-          />
-          <div className="mt-12 flex flex-col gap-14">
-            {bookShelves.map((shelf) => {
-              const Icon = shelfIcons[shelf.icon];
-              return (
-                <div key={shelf.title}>
-                  <div className="mb-6 flex items-center justify-between">
-                    <h3 className="flex items-center gap-3 text-xl font-semibold text-navy-title sm:text-2xl">
-                      <Icon className="h-7 w-7 text-body" />
-                      {shelf.title}
-                    </h3>
-                    <Link
-                      to="/search"
-                      className="rounded-pill border border-teal px-6 py-2 text-sm font-medium text-teal transition hover:bg-teal hover:text-white"
-                    >
-                      See all
-                    </Link>
-                  </div>
-                  <div className="no-scrollbar -mx-5 flex gap-5 overflow-x-auto px-5 pb-2">
-                    {shelf.books.map((b, i) => (
-                      <BookCard key={i} book={b} />
-                    ))}
-                  </div>
-                </div>
-              );
-            })}
+      {/* ---------- Top category ---------- */}
+      <section className="py-14 lg:py-20 fhd:pb-[100px] fhd:pt-[80px]">
+        <div className={`${frame} fhd:pl-[120px]`}>
+          <h2 className={titleCls}>Choice favourite course from top category</h2>
+          <div className="mt-10 grid gap-6 sm:grid-cols-2 lg:grid-cols-4 lg:gap-8 fhd:-ml-px fhd:mt-[53px] fhd:grid-cols-[repeat(4,349px)] fhd:gap-[80px]">
+            {topCategories.map((c, i) => (
+              <CategoryCard key={i} cat={c} />
+            ))}
           </div>
+        </div>
+      </section>
+
+      {/* ---------- Recommended for you ---------- */}
+      <section className="bg-sky/20 py-14 lg:py-20 fhd:h-[1022px] fhd:pb-0 fhd:pt-[97px]">
+        <div className={`${frame} fhd:pl-[139px] fhd:pr-[135px]`}>
+          <CourseRow row={courseRows.recommended} arrows />
+        </div>
+      </section>
+
+      {/* ---------- Get choice + banner + personal development ---------- */}
+      <section className="py-14 lg:py-20 fhd:py-[90px]">
+        <div className={`${frame} fhd:pl-[139px] fhd:pr-[135px]`}>
+          <CourseRow row={courseRows.choice} />
+        </div>
+
+        <div className={`${frame} mt-6 lg:mt-12 fhd:mt-[90px] fhd:pl-[119px]`}>
+          <div className="flex flex-col items-center rounded-[37px] bg-navy px-6 py-12 text-center text-white sm:px-12 fhd:h-[459px] fhd:w-[1682px] fhd:px-0 fhd:pb-0 fhd:pt-[70px]">
+            <h2 className="text-2xl font-semibold leading-[1.5] text-white sm:text-3xl fhd:text-4xl fhd:leading-[54px]">
+              Online coaching lessons for remote learning.
+            </h2>
+            <p className="mt-5 max-w-[1259px] text-base leading-[1.8] tracking-[0.02em] sm:text-xl fhd:mt-[30px] fhd:text-2xl fhd:leading-[43.2px]">
+              Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempos Lorem ipsum dolor
+              sitamet, consectetur adipiscing elit, sed do eiusmod tempor
+            </p>
+            <Link
+              to="/membership"
+              className="mt-10 flex h-[63px] w-[236px] items-center justify-center rounded-xl bg-teal text-base font-bold text-white transition hover:bg-teal-dark fhd:mt-[73px]"
+            >
+              Start learning now
+            </Link>
+          </div>
+        </div>
+
+        <div className={`${frame} mt-14 lg:mt-20 fhd:mt-[90px] fhd:pl-[139px] fhd:pr-[135px]`}>
+          <CourseRow row={courseRows.personal} />
+        </div>
+      </section>
+
+      {/* ---------- Student are viewing ---------- */}
+      <section className="bg-sky/20 py-14 lg:py-20 fhd:h-[946px] fhd:pb-0 fhd:pt-[96px]">
+        <div className={`${frame} fhd:pl-[139px] fhd:pr-[135px]`}>
+          <CourseRow row={courseRows.viewing} />
         </div>
       </section>
     </>

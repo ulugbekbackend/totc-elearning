@@ -475,3 +475,182 @@ export const participants = [
   { name: 'Humbert Holland', photo: img.meetingTile3 },
   { name: 'Patricia Mendoza', photo: img.meetingTile4 },
 ];
+
+/* ============ Course ekrani (Figma "Course" 47:247) ============ */
+const lorem =
+  'Lorem ipsum dolor sit amet, consectetur adipising elit, sed do eiusmod tempor';
+
+// "Welcome back" — davom ettirilayotgan kurslar
+export const courseProgress = [
+  { slug: 'user-experience-design', image: img.news1, done: 5, total: 7 },
+  { slug: 'data-science-basics', image: img.course2, done: 5, total: 7 },
+  { slug: 'academic-writing', image: img.blog1, done: 5, total: 7 },
+].map((c) => ({ ...c, title: 'AWS Certified Solutions Architect', author: 'Lina', avatar: img.avatarLina }));
+
+// "Choice favourite course from top category"
+export const topCategories = [
+  { title: 'Design', icon: 'faPaintBrush', color: '#49BBBD' },
+  { title: 'Development', icon: 'faDesktop', color: '#5B72EE' },
+  { title: 'Development', icon: 'faDatabase', color: '#9DCCFF' },
+  { title: 'Business', icon: 'faBriefcase', color: '#00CBB8' },
+  { title: 'Marketing', icon: 'faSlideshare', color: '#F48C06' },
+  { title: 'Photography', icon: 'faBook', color: '#EE645B' },
+  { title: 'Acting', icon: 'faFilm', color: '#252641' },
+  { title: 'Business', icon: 'faBriefcase', color: '#00CBB8' },
+].map((c) => ({
+  ...c,
+  text: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmodadipiscing elit, sed do eiusmod',
+}));
+
+// Kurs qatorlari — Figma'da har qatorda 1- va 3-kartaning rasmi boshqa
+const tiles = ['user-experience-design', 'data-science-basics', 'academic-writing', 'intro-to-business'].map(
+  (slug, i) => ({
+    slug,
+    image: i % 2 ? img.news1 : img.news2,
+    category: 'Design',
+    duration: '3 Month',
+    title: 'AWS Certified solutions Architect',
+    text: lorem,
+    author: 'Lina',
+    avatar: img.avatarLina,
+    oldPrice: 100,
+    price: 80,
+  })
+);
+
+export const courseRows = {
+  recommended: { title: 'Recommended for you', courses: tiles },
+  choice: { title: 'Get choice of your course', courses: tiles },
+  personal: { title: 'The course in personal development', courses: tiles },
+  viewing: { title: 'Student are viewing', courses: tiles },
+};
+
+/* ============ Course Detail (Figma 46:217) ============ */
+export const courseReviewSummary = {
+  score: 4,
+  label: 'Top Raiting',
+  // Figma'da beshala qator bir xil (333 / 432)
+  bars: [5, 4, 3, 2, 1].map((stars) => ({ stars, pct: (333 / 432) * 100 })),
+};
+
+const reviewText =
+  'Class, launched less than a year ago by Blackboard co-founder Michael Chasen, integrates exclusively...';
+export const courseReviews = [
+  { author: 'Lina', avatar: img.avatarLina, rating: 5, ago: '3 Month', text: reviewText },
+  { author: 'Lina', avatar: img.avatarLina, rating: 5, ago: '3 Month', text: reviewText },
+];
+
+export const courseIncludes = [
+  { icon: 'faCertificate', text: 'Money Back Guarantee' },
+  { icon: 'faCamera', text: 'Access on all devices' },
+  { icon: 'faFileAlt', text: 'Certification of completion' },
+  { icon: 'faChartBar', text: '32 Moduls' },
+];
+
+// "Marketing Articles" — Figma'dagi rasmlar tartibi
+export const marketingArticles = [img.news2, img.blog1, img.course1, img.news1].map((image, i) => ({
+  slug: ['user-experience-design', 'data-science-basics', 'academic-writing', 'intro-to-business'][i],
+  image,
+  category: 'Design',
+  duration: '3 Month',
+  title: 'AWS Certified solutions Architect',
+  text: 'Lorem ipsum dolor sit amet, consectetur adipising elit, sed do eiusmod tempor',
+  author: 'Lina',
+  avatar: img.avatarLina,
+  oldPrice: 100,
+  price: 80,
+}));
+
+export const educationOffers = Array.from({ length: 3 }, () => ({
+  discount: '50%',
+  title: 'FOR INSTRUCTORS',
+  text: 'TOTC’s school management software helps traditional and online schools manage scheduling,',
+  image: img.forInstructors,
+}));
+
+/* ============ Course Full View (Figma 77:247) ============ */
+// Figma'dagi qator ranglari: teal (joriy dars), orange/30, sky/30, coral/30
+const tones = ['blue', 'orange', 'blue', 'red'];
+const lessonTitle = 'Lesson 01 : Introduction about XD';
+export const fullViewLessons = [
+  {
+    title: 'Change Simplification',
+    lessons: ['active', 'orange', 'blue', 'red'].map((tone) => ({ title: lessonTitle, len: '30 mins', tone, icon: true })),
+  },
+  {
+    title: 'PRACTICE QUIZ',
+    lessons: Array.from({ length: 12 }, (_, i) => ({ title: lessonTitle, len: '30 mins', tone: tones[i % 4], icon: true })),
+  },
+  {
+    title: 'PRACTICE QUIZ',
+    lessons: Array.from({ length: 16 }, (_, i) => ({ title: lessonTitle, tone: tones[i % 4] })),
+  },
+];
+
+const fvLorem =
+  'Lorem ipsum dolor sit amet, consectetur adi piscing elit, sed do eiusmodadipiscing elit, sed do eiusmodLorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmodadipiscing elit, sed do eiusmodLorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmodadipiscing elit, sed do eiusmodeiusmodadipiscing elit, sed do eiusmod';
+export const fullViewSections = [
+  { title: 'O6 Super Coins on the way', paragraphs: [fvLorem] },
+  { title: 'Who this course is for?', paragraphs: [fvLorem + 'L'] },
+  { title: 'Archievable', paragraphs: [fvLorem + 'LWho this course is for?', fvLorem + 'L'] },
+];
+
+export const fullViewReview = {
+  author: 'Bulkin Simons',
+  avatar: img.avatarLina,
+  text: 'Lorem ipsum dolor sit amet, consectetur adi piscing elit, sed do eiusmodadipiscing elit, sed do eiusmodLorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmodadipiscing elit, sed do eiusmodLorem',
+};
+
+// "Student also bought" — Figma rasmlari: news2, course2, course3, course4
+export const alsoBought = [img.news2, img.course2, img.course3, img.course4].map((image, i) => ({
+  ...marketingArticles[i],
+  image,
+}));
+
+/* ============ Literature course (Figma 119:251) ============ */
+export const literatureAuthor = {
+  name: 'John Anderson',
+  role: 'Assistant Professor at Mcmaster University',
+  bio: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt utlabore et dolore magna aliqua. Ut enum ad minim veniam, quis nostrud',
+  photo: img.literatureAuthor,
+  rating: '4.9 instructor Rating',
+  students: '1,592 Students',
+};
+
+export const literatureTabs = ['About', 'Course', 'Notes', 'Project', 'Podcast', 'Book', 'Review'];
+
+export const literatureBooks = [img.book1, img.book2, img.book3, img.book4, img.book5, img.book2].map((image) => ({
+  image,
+  title: 'All Benefits of PLUS',
+  price: 24,
+}));
+
+/* ============ Course Calendar (Figma 68:428, 62:245, 74:231) ============ */
+const calLorem =
+  'Lorem ipsum dolor sit amet, consectetur adi piscing elit, sed do eiusmodadipiscing elit, sed do eiusmodLorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmodadipiscing elit, sed do eiusmodLorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmodadipiscing elit, sed do eiusmodeiusmodadipiscing elit, sed do eiusmod';
+export const shareIntro = [calLorem + 'Lorem' + calLorem.replace('eiusmod', 'eiusmod') + 'Lorem', 'eiusmodLorem dolor sit amet, consectetur adipiscing'];
+
+// Kun ko'rinishidagi soatlar (2 PM … 6 PM) va voqealar (soat, 24 soatlik)
+export const calendarDayHours = [14, 15, 16, 17, 18];
+export const courseEvents = [
+  { date: '2021-09-12', title: 'Adobe XD Live Class', start: 14, end: 15, tone: 'coral' },
+];
+
+// "Create new event" maydonlaridagi Figma matnlari — placeholder sifatida
+export const createEventDefaults = {
+  name: 'Adobe XD Auto - Animate : Your Guide to Creating',
+  start: 'September 24, 2017 07:59 am',
+  end: 'September 24, 2017 07:59 am',
+  location: '2118 Thornridge Cir, Syracuse, Connecticut 35624',
+  notification: '30 mins',
+  email: 'jessica.hansome@example.com',
+  description:
+    'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmodadipiscing elit, sed do eiusmodLorem ipsum dolor sit amet, consectetur Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmodadipiscing elit, sed do eiusmodLorem ipsum dolor sit amet, consectetur ',
+};
+
+export const sharePosts = ['sky', 'orange', 'coral'].map((tone) => ({
+  title: 'O6 Super Coins on the way',
+  subtitle: 'Lorem ipsum dolor sit amet, consectetur adi',
+  text: calLorem + 'L',
+  tone,
+}));

@@ -5,11 +5,11 @@ import { Link } from 'react-router-dom';
  * yozuv rombning 22px ichidan boshlanadi — "T" romb ichida turadi.
  * O'lchamlar `--h` (romb balandligi) ga nisbatan: 44px → lg 56px → 2xl 83px (Figma, `large` bo'lsa).
  *
- * tone:    'light' — oq yozuv (hero ustida, footer), 'dark' — navy yozuv
+ * tone:    'light' — oq yozuv (hero ustida, footer), 'dark' — navy yozuv, 'muted' — #5B5B5B (ichki sahifalar navbari)
  * diamond: 'nav' — #00FFF0 (hero ustidagi navbar), 'teal' — #49BBBD
  */
 export default function Logo({ tone = 'dark', diamond, withTagline = false, large = true, className = '' }) {
-  const text = tone === 'light' ? 'text-white' : 'text-navy';
+  const text = { light: 'text-white', muted: 'text-muted tracking-[0.04em]' }[tone] ?? 'text-navy';
   const src = (diamond ?? (tone === 'light' ? 'nav' : 'teal')) === 'nav'
     ? '/figma/icons/logoDiamondNav.svg'
     : '/figma/icons/logoDiamondTeal.svg';

@@ -1,262 +1,103 @@
 import { useState } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
-import { courses, weekDays } from '../data/content.js';
-import { IconCheck, IconChevronLeft, IconUsers, IconCalendar } from '../components/Icons.jsx';
+import { useNavigate } from 'react-router-dom';
+import { createEventDefaults as ph } from '../data/content.js';
+import CoursePlayerShell from '../components/CoursePlayerShell.jsx';
+import { FaIcon } from '../components/CourseBlocks.jsx';
 
 /**
- * Figmadagi "Course Calendar Create1" va "Create2" ekranlari —
- * ikki qadamli sehrgar sifatida birlashtirilgan.
+ * Figma "Course Calendar Create1" (62:245). Forma kartasi 1337×1006 (x=533, y=389):
+ * yorliqlar 18px #5B5B5B, maydonlar 60px (tavsif 260px), 616px ikki ustun orasi 44px, "Save Now" 337×63.
  */
+const labelCls = 'block text-lg font-semibold leading-[27px] text-muted';
+const fieldCls =
+  'mt-2.5 block h-[60px] w-full rounded-[10px] border border-[#d9d9d9] bg-transparent px-5 text-lg text-[#5b5b5b] outline-none ' +
+  'transition placeholder:text-[#9d9b9b] focus:border-teal focus:ring-4 focus:ring-teal/15';
+
+function Field({ label, className = '', children }) {
+  return (
+    <label className={`block ${className}`}>
+      <span className={labelCls}>{label}</span>
+      {children}
+    </label>
+  );
+}
+
 export default function CourseCalendarCreate() {
-  const [step, setStep] = useState(1);
-  const [form, setForm] = useState({
-    course: courses[0].slug,
-    title: '',
-    room: 'Online',
-    date: '2026-09-21',
-    start: '09:00',
-    end: '10:30',
-    repeat: 'weekly',
-    days: ['Mon', 'Wed'],
-    capacity: 30,
-    recording: true,
-    notify: true,
-    notes: '',
-  });
   const navigate = useNavigate();
+  const [form, setForm] = useState({ name: '', start: '', end: '', location: '', notification: '30 mins', email: '', description: '' });
+  const set = (k) => (e) => setForm((f) => ({ ...f, [k]: e.target.value }));
 
-  const set = (k, v) => setForm((f) => ({ ...f, [k]: v }));
-  const toggleDay = (d) =>
-    setForm((f) => ({
-      ...f,
-      days: f.days.includes(d) ? f.days.filter((x) => x !== d) : [...f.days, d],
-    }));
-
-  const steps = [
-    { n: 1, label: 'Class details' },
-    { n: 2, label: 'Schedule & access' },
-  ];
+  const submit = (e) => {
+    e.preventDefault();
+    navigate('/calendar/share');
+  };
 
   return (
-    <div className="mx-auto w-full max-w-4xl">
-      <Link to="/calendar" className="mb-6 inline-flex items-center gap-2 text-sm text-body transition hover:text-teal">
-        <IconChevronLeft className="h-4 w-4" /> Back to calendar
-      </Link>
+    <CoursePlayerShell backTo="/calendar" backLabel="Back to calendar" sections={2} panelPb="fhd:pb-[30px]">
+      <div className="px-5 pb-12 pt-8 sm:px-8 fhd:pb-0 fhd:pl-[30px] fhd:pr-[50px] fhd:pt-[30px]">
+        <h2 className="text-2xl font-semibold leading-[1.5] text-navy fhd:text-[30px] fhd:leading-[45px]">Create new event</h2>
+        <p className="mt-4 break-words text-base leading-[1.5] tracking-[0.02em] text-body fhd:mt-5 fhd:w-[1359px] fhd:text-lg fhd:leading-[27px]">
+          Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmodadipiscing elit, sed do eiusmodLorem ipsum dolor
+          sit amet, consectetur adipiscing elit, sed do eiusmodadipiscing elit, sed do eiusmodLorem ipsum dolor sit amet,
+          consectetur adipiscing elit, sed do eiusmodadipiscing elit, sed do eiusmodeiusmodadipiscing elit, sed do eiusmodLorem
+        </p>
 
-      <h1 className="text-2xl font-bold text-navy-title sm:text-3xl">Create a class</h1>
-      <p className="mt-1 text-body">Set it up once and it repeats on your calendar.</p>
+        <form
+          onSubmit={submit}
+          className="mt-8 rounded-[20px] bg-white p-6 sm:px-[30px] sm:pb-[98px] sm:pt-[30px] fhd:ml-1.5 fhd:mt-[50px] fhd:h-[1006px] fhd:w-[1337px] fhd:pl-[30px] fhd:pr-[31px]"
+        >
+          <Field label="Event Name">
+            <input className={fieldCls} value={form.name} onChange={set('name')} placeholder={ph.name} required />
+          </Field>
 
-      {/* Qadamlar */}
-      <div className="mt-8 flex items-center gap-4">
-        {steps.map((s, i) => (
-          <div key={s.n} className="flex flex-1 items-center gap-4">
-            <button
-              onClick={() => setStep(s.n)}
-              className="flex min-w-0 items-center gap-3 text-left"
-            >
-              <span
-                className={`flex h-10 w-10 shrink-0 items-center justify-center rounded-full font-semibold transition ${
-                  step > s.n
-                    ? 'bg-teal text-white'
-                    : step === s.n
-                      ? 'bg-teal/15 text-teal ring-2 ring-teal'
-                      : 'bg-cloud text-lilac'
-                }`}
-              >
-                {step > s.n ? <IconCheck className="h-5 w-5" /> : s.n}
-              </span>
-              <span className={`truncate text-sm font-medium ${step >= s.n ? 'text-navy' : 'text-lilac'}`}>
-                {s.label}
-              </span>
-            </button>
-            {i < steps.length - 1 && (
-              <span className={`hidden h-px flex-1 sm:block ${step > s.n ? 'bg-teal' : 'bg-line'}`} />
-            )}
+          <div className="mt-5 grid gap-5 sm:grid-cols-2 sm:gap-x-11">
+            <Field label="Start date / Time">
+              <input className={fieldCls} value={form.start} onChange={set('start')} placeholder={ph.start} />
+            </Field>
+            <Field label="End Date / Time">
+              <input className={fieldCls} value={form.end} onChange={set('end')} placeholder={ph.end} />
+            </Field>
           </div>
-        ))}
-      </div>
 
-      <form
-        onSubmit={(e) => {
-          e.preventDefault();
-          if (step === 1) return setStep(2);
-          navigate('/calendar');
-        }}
-        className="mt-8 rounded-card bg-white p-7 shadow-card lg:p-9"
-      >
-        {step === 1 ? (
-          <div className="flex flex-col gap-6">
-            <label className="block">
-              <span className="mb-2 block font-medium text-navy">Course</span>
-              <select
-                value={form.course}
-                onChange={(e) => set('course', e.target.value)}
-                className="field"
-              >
-                {courses.map((c) => (
-                  <option key={c.slug} value={c.slug}>{c.title}</option>
-                ))}
-              </select>
-            </label>
+          <Field label="Location" className="mt-5">
+            <input className={fieldCls} value={form.location} onChange={set('location')} placeholder={ph.location} />
+          </Field>
 
-            <label className="block">
-              <span className="mb-2 block font-medium text-navy">Class title</span>
-              <input
-                value={form.title}
-                onChange={(e) => set('title', e.target.value)}
-                placeholder="e.g. Sketching before you commit"
-                className="field"
-                required
-              />
-            </label>
-
-            <div className="grid gap-6 sm:grid-cols-2">
-              <label className="block">
-                <span className="mb-2 block font-medium text-navy">Room</span>
-                <select value={form.room} onChange={(e) => set('room', e.target.value)} className="field">
-                  {['Online', 'Room A1', 'Room B2', 'Lab 3', 'Hall'].map((r) => (
-                    <option key={r}>{r}</option>
+          <div className="mt-5 grid gap-5 sm:grid-cols-2 sm:gap-x-11">
+            <Field label="Notification">
+              <span className="relative block">
+                <select className={`${fieldCls} appearance-none pr-12 text-[#9d9b9b]`} value={form.notification} onChange={set('notification')}>
+                  {['10 mins', '30 mins', '1 hour', '1 day'].map((o) => (
+                    <option key={o}>{o}</option>
                   ))}
                 </select>
-              </label>
-
-              <label className="block">
-                <span className="mb-2 block font-medium text-navy">Capacity</span>
-                <input
-                  type="number"
-                  min={1}
-                  max={500}
-                  value={form.capacity}
-                  onChange={(e) => set('capacity', +e.target.value)}
-                  className="field"
-                />
-              </label>
-            </div>
-
-            <label className="block">
-              <span className="mb-2 block font-medium text-navy">Notes for students</span>
-              <textarea
-                rows={4}
-                value={form.notes}
-                onChange={(e) => set('notes', e.target.value)}
-                placeholder="What should they bring or read beforehand?"
-                className="field resize-y"
-              />
-            </label>
+                <FaIcon name="faAngleDown" className="pointer-events-none absolute right-[21px] top-1/2 mt-[5px] h-2.5 w-[15px] -translate-y-1/2 text-body" />
+              </span>
+            </Field>
+            <Field label="Email">
+              <input type="email" className={fieldCls} value={form.email} onChange={set('email')} placeholder={ph.email} />
+            </Field>
           </div>
-        ) : (
-          <div className="flex flex-col gap-6">
-            <div className="grid gap-6 sm:grid-cols-3">
-              <label className="block">
-                <span className="mb-2 block font-medium text-navy">First date</span>
-                <input type="date" value={form.date} onChange={(e) => set('date', e.target.value)} className="field" />
-              </label>
-              <label className="block">
-                <span className="mb-2 block font-medium text-navy">Starts</span>
-                <input type="time" value={form.start} onChange={(e) => set('start', e.target.value)} className="field" />
-              </label>
-              <label className="block">
-                <span className="mb-2 block font-medium text-navy">Ends</span>
-                <input type="time" value={form.end} onChange={(e) => set('end', e.target.value)} className="field" />
-              </label>
-            </div>
 
-            <div>
-              <span className="mb-2 block font-medium text-navy">Repeat</span>
-              <div className="flex flex-wrap gap-2">
-                {[
-                  { id: 'none', label: 'Does not repeat' },
-                  { id: 'weekly', label: 'Weekly' },
-                  { id: 'biweekly', label: 'Every 2 weeks' },
-                  { id: 'monthly', label: 'Monthly' },
-                ].map((r) => (
-                  <button
-                    key={r.id}
-                    type="button"
-                    onClick={() => set('repeat', r.id)}
-                    className={`rounded-pill px-5 py-2.5 text-sm font-medium transition ${
-                      form.repeat === r.id ? 'bg-teal text-white' : 'bg-cloud text-body hover:text-navy'
-                    }`}
-                  >
-                    {r.label}
-                  </button>
-                ))}
-              </div>
-            </div>
+          <Field label="Event Description" className="mt-5">
+            <textarea
+              className={`${fieldCls} h-[260px] resize-none py-4 leading-[27px]`}
+              value={form.description}
+              onChange={set('description')}
+              placeholder={ph.description}
+            />
+          </Field>
 
-            {form.repeat !== 'none' && (
-              <div>
-                <span className="mb-2 block font-medium text-navy">On these days</span>
-                <div className="flex flex-wrap gap-2">
-                  {weekDays.map((d) => (
-                    <button
-                      key={d}
-                      type="button"
-                      onClick={() => toggleDay(d)}
-                      className={`h-12 w-12 rounded-full text-sm font-medium transition ${
-                        form.days.includes(d) ? 'bg-teal text-white' : 'bg-cloud text-body hover:text-navy'
-                      }`}
-                    >
-                      {d.slice(0, 2)}
-                    </button>
-                  ))}
-                </div>
-              </div>
-            )}
-
-            <div className="flex flex-col gap-4 rounded-card bg-cloud p-6">
-              {[
-                { key: 'recording', label: 'Record the session', hint: 'Students who miss it get the recording automatically.' },
-                { key: 'notify', label: 'Notify enrolled students', hint: 'Sends an email and a calendar invite now.' },
-              ].map((o) => (
-                <label key={o.key} className="flex cursor-pointer items-start gap-4">
-                  <input
-                    type="checkbox"
-                    checked={form[o.key]}
-                    onChange={(e) => set(o.key, e.target.checked)}
-                    className="mt-1 h-5 w-5 rounded border-line text-teal focus:ring-teal/30"
-                  />
-                  <span>
-                    <span className="block font-medium text-navy">{o.label}</span>
-                    <span className="block text-sm text-body">{o.hint}</span>
-                  </span>
-                </label>
-              ))}
-            </div>
-
-            {/* Xulosa */}
-            <div className="rounded-card border border-teal/30 bg-teal/5 p-6">
-              <p className="mb-4 font-semibold text-navy">Summary</p>
-              <ul className="flex flex-col gap-2.5 text-sm text-body">
-                <li className="flex items-center gap-3">
-                  <IconCalendar className="h-4 w-4 text-teal" />
-                  {form.date} · {form.start}–{form.end}
-                  {form.repeat !== 'none' && ` · ${form.repeat}, ${form.days.join(', ')}`}
-                </li>
-                <li className="flex items-center gap-3">
-                  <IconUsers className="h-4 w-4 text-teal" />
-                  Up to {form.capacity} students · {form.room}
-                </li>
-              </ul>
-            </div>
-          </div>
-        )}
-
-        <div className="mt-9 flex flex-wrap items-center justify-between gap-4 border-t border-line pt-7">
-          {step === 2 ? (
-            <button type="button" onClick={() => setStep(1)} className="btn-outline btn-md px-8">
-              Back
+          <div className="mt-10 flex justify-end fhd:mt-[50px]">
+            <button
+              type="submit"
+              className="h-[63px] w-full rounded-xl bg-teal text-2xl font-bold text-white transition hover:bg-teal-dark sm:w-[337px]"
+            >
+              Save Now
             </button>
-          ) : (
-            <Link to="/calendar" className="text-body transition hover:text-navy">
-              Cancel
-            </Link>
-          )}
-          <button type="submit" className="btn-primary btn-md px-10">
-            {step === 1 ? 'Continue' : 'Create class'}
-          </button>
-        </div>
-      </form>
-    </div>
+          </div>
+        </form>
+      </div>
+    </CoursePlayerShell>
   );
 }
