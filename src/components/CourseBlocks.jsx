@@ -27,7 +27,7 @@ const cardShadow = 'shadow-[0_18.83px_47.08px_rgba(47,50,125,0.10)]';
  */
 export function CardRow({
   children, arrows = false, className = '', gap = 'gap-6 fhd:gap-[50px]',
-  head = null, headClassName = '', bodyClassName = '', scrollFhd = false,
+  head = null, headClassName = '', bodyClassName = '', scrollFhd = false, arrowsClassName = '-mt-4 fhd:mt-[50px]',
 }) {
   const ref = useRef(null);
   const scroll = (dir) => {
@@ -37,7 +37,7 @@ export function CardRow({
     el.scrollBy({ left: dir * (card.offsetWidth + parseFloat(getComputedStyle(el).columnGap || 0)), behavior: 'smooth' });
   };
   const buttons = arrows && (
-    <div className={`flex shrink-0 justify-end gap-5 ${head ? '' : '-mt-4 fhd:mt-[50px]'}`}>
+    <div className={`flex shrink-0 justify-end gap-5 ${head ? '' : arrowsClassName}`}>
       {[-1, 1].map((d) => (
         <button
           key={d}
