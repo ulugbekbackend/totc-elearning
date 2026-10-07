@@ -49,16 +49,16 @@ export default function AuthScreen({ mode = 'login' }) {
 
       {/* ---------- Forma ---------- */}
       <div
-        className={`flex flex-1 flex-col justify-center px-[26px] py-12 lg:items-center lg:px-0 lg:py-0 ${
+        className={`flex min-w-0 flex-1 flex-col justify-center px-[26px] py-12 lg:items-center lg:px-0 lg:py-0 ${
           isLogin ? 'lg:pr-[5px]' : ''
         }`}
       >
-        <div className="flex w-full max-w-[317px] flex-col sm:mx-auto lg:mx-0 lg:w-[435px] lg:max-w-none">
+        <div className="mx-auto flex w-full max-w-[317px] flex-col lg:mx-0 lg:w-[435px] lg:max-w-none">
 
           <p className="text-center text-base leading-6 text-black">Welcome to lorem..!</p>
 
           {/* Login / Register tumbler */}
-          <div className="mt-6 flex h-[59px] w-[315px] max-w-full items-center justify-between rounded-[33px] bg-teal/60 pl-3 pr-[11px] lg:mx-auto lg:w-[329px] lg:pl-[13px] lg:pr-3">
+          <div className="mx-auto mt-6 flex h-[59px] w-[315px] max-w-full items-center justify-between rounded-[33px] bg-teal/60 pl-3 pr-[11px] lg:w-[329px] lg:pl-[13px] lg:pr-3">
             <Link
               to="/login"
               className={`flex h-10 w-[140px] items-center justify-center rounded-full text-base font-medium lg:w-[146px] text-white transition ${
@@ -78,7 +78,7 @@ export default function AuthScreen({ mode = 'login' }) {
           </div>
 
           <p
-            className={`h-[49px] w-[calc(100%+14px)] leading-6 text-muted lg:mt-[52px] lg:w-[454px] ${
+            className={`h-[49px] w-full leading-6 text-muted lg:mt-[52px] lg:w-[454px] ${
               isLogin ? 'mt-[52px]' : 'mt-[51px]'
             }`}
           >
