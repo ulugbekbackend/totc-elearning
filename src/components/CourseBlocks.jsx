@@ -21,8 +21,14 @@ export function FaIcon({ name, className = '' }) {
 
 const cardShadow = 'shadow-[0_18.83px_47.08px_rgba(47,50,125,0.10)]';
 
-/* ---------- Gorizontal qator + strelkalar ---------- */
-export function CardRow({ children, arrows = false, className = '', gap = 'gap-6 fhd:gap-[50px]' }) {
+/* ---------- Gorizontal qator + strelkalar ----------
+ * head      — berilsa, strelkalar qator ostida emas, shu sarlavha bilan bir qatorda (o'ngda) turadi
+ * scrollFhd — 1920 da ham aylantiriladi (Figma'da qator kadr chetidan chiqib ketgan joylar uchun)
+ */
+export function CardRow({
+  children, arrows = false, className = '', gap = 'gap-6 fhd:gap-[50px]',
+  head = null, headClassName = '', bodyClassName = '', scrollFhd = false,
+}) {
   const ref = useRef(null);
   const scroll = (dir) => {
     const el = ref.current;
@@ -30,31 +36,47 @@ export function CardRow({ children, arrows = false, className = '', gap = 'gap-6
     if (!card) return;
     el.scrollBy({ left: dir * (card.offsetWidth + parseFloat(getComputedStyle(el).columnGap || 0)), behavior: 'smooth' });
   };
+  const buttons = arrows && (
+    <div className={`flex shrink-0 justify-end gap-5 ${head ? '' : '-mt-4 fhd:mt-[50px]'}`}>
+      {[-1, 1].map((d) => (
+        <button
+          key={d}
+          type="button"
+          onClick={() => scroll(d)}
+          aria-label={d < 0 ? 'Previous' : 'Next'}
+          className={`flex h-[50px] w-[50px] items-center justify-center rounded text-white transition hover:bg-teal-dark ${
+            d < 0 ? 'bg-teal/50' : 'bg-teal'
+          }`}
+        >
+          <FaIcon name={d < 0 ? 'faAngleLeft' : 'faAngleRight'} className="h-4 w-2.5" />
+        </button>
+      ))}
+    </div>
+  );
+  const row = (
+    <div
+      ref={ref}
+      className={`no-scrollbar -mx-5 flex snap-x snap-mandatory scroll-px-5 overflow-x-auto px-5 pb-10 pt-1 sm:-mx-8 sm:scroll-px-8 sm:px-8 fhd:mx-0 fhd:scroll-px-0 ${
+        scrollFhd ? 'fhd:pl-0 fhd:pr-[50px]' : 'fhd:overflow-visible fhd:p-0'
+      } ${gap} ${className}`}
+    >
+      {children}
+    </div>
+  );
+  if (head)
+    return (
+      <>
+        <div className={`flex items-center justify-between gap-4 ${headClassName}`}>
+          {head}
+          {buttons}
+        </div>
+        <div className={bodyClassName}>{row}</div>
+      </>
+    );
   return (
     <>
-      <div
-        ref={ref}
-        className={`no-scrollbar -mx-5 flex snap-x snap-mandatory scroll-px-5 overflow-x-auto px-5 pb-10 pt-1 sm:-mx-8 sm:scroll-px-8 sm:px-8 fhd:mx-0 fhd:overflow-visible fhd:p-0 ${gap} ${className}`}
-      >
-        {children}
-      </div>
-      {arrows && (
-        <div className="-mt-4 flex justify-end gap-5 fhd:mt-[50px]">
-          {[-1, 1].map((d) => (
-            <button
-              key={d}
-              type="button"
-              onClick={() => scroll(d)}
-              aria-label={d < 0 ? 'Previous' : 'Next'}
-              className={`flex h-[50px] w-[50px] items-center justify-center rounded text-white transition hover:bg-teal-dark ${
-                d < 0 ? 'bg-teal/50' : 'bg-teal'
-              }`}
-            >
-              <FaIcon name={d < 0 ? 'faAngleLeft' : 'faAngleRight'} className="h-4 w-2.5" />
-            </button>
-          ))}
-        </div>
-      )}
+      {row}
+      {buttons}
     </>
   );
 }

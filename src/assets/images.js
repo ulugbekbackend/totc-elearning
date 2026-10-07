@@ -148,6 +148,7 @@ const FIGMA = {
 
   // Literature course
   literatureHero: '/figma/literatureHero.webp',
+  literatureAuthor: '/figma/literatureAuthor.webp', // John Anderson portreti (Figma MCP asset)
   book1: '/figma/book1.webp',
   book2: '/figma/book2.webp',
   book3: '/figma/book3.webp',

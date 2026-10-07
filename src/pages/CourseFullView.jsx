@@ -1,221 +1,171 @@
 import { useState } from 'react';
 import { useParams, Link, Navigate } from 'react-router-dom';
-import { courses } from '../data/content.js';
-import { Breadcrumb } from '../components/ui.jsx';
-import {
-  IconPlay, IconCheck, IconChevronLeft, IconChevronRight, IconBook, IconChat,
-} from '../components/Icons.jsx';
+import img from '../assets/images.js';
+import { courses, fullViewLessons, fullViewSections, fullViewReview, alsoBought } from '../data/content.js';
+import { CardRow, CourseTile, FaIcon } from '../components/CourseBlocks.jsx';
+import { IconBookOpen, IconPlay } from '../components/Icons.jsx';
 
-const modules = [
-  {
-    title: 'Getting started',
-    lessons: [
-      { title: 'Welcome and how this course works', len: '4:20', done: true },
-      { title: 'Setting up your workspace', len: '11:05', done: true },
-      { title: 'The vocabulary you will need', len: '8:44', done: true },
-    ],
-  },
-  {
-    title: 'Core concepts',
-    lessons: [
-      { title: 'Research that actually informs decisions', len: '17:32', done: true },
-      { title: 'Sketching before you commit', len: '14:10', current: true },
-      { title: 'Turning sketches into wireframes', len: '21:48' },
-      { title: 'Workshop: your first flow', len: '26:02' },
-    ],
-  },
-  {
-    title: 'Testing and iteration',
-    lessons: [
-      { title: 'Writing a usability test script', len: '12:55' },
-      { title: 'Running the session', len: '19:13' },
-      { title: 'Reading the results', len: '15:39' },
-    ],
-  },
-];
+/**
+ * Figma "Course Full View" (77:247, 1920×2978) — navbar/footer'siz to'liq ekran.
+ * Chapda 497px darslar paneli, o'ngda 163px teal sarlavha, video (1323×884), matn bloklari,
+ * sharh va "Student also bought" qatori. fhd: da o'lchamlar 1:1.
+ */
+const toneCls = {
+  active: 'bg-teal text-white',
+  orange: 'bg-orange/30 text-navy',
+  blue: 'bg-sky/30 text-navy',
+  red: 'bg-coral/30 text-navy',
+};
+
+function LessonPanel({ current, onSelect }) {
+  let n = 0;
+  return (
+    <nav className="bg-white px-5 pb-12 pt-6 lg:min-h-full fhd:pb-[110px] fhd:pl-[21px] fhd:pr-5 fhd:pt-[26px]">
+      {fullViewLessons.map((sec, si) => (
+        <section key={si} className={si ? 'mt-10 fhd:mt-[50px]' : ''}>
+          <h2 className={`text-2xl font-semibold leading-[1.5] text-navy fhd:pl-[9px] fhd:text-[30px] fhd:leading-[45px] ${si ? '' : 'mt-6 fhd:mt-[47px]'}`}>
+            {sec.title}
+          </h2>
+          <ul className={`flex flex-col gap-[15px] ${si ? 'mt-5' : 'mt-4'}`}>
+            {sec.lessons.map((l) => {
+              const id = n++;
+              const tone = id === current ? 'active' : l.tone === 'active' ? 'orange' : l.tone;
+              return (
+                <li key={id}>
+                  <button
+                    type="button"
+                    onClick={() => onSelect(id)}
+                    className={`flex h-[63px] w-full items-center rounded-xl pl-[25px] pr-[18px] text-left text-base transition hover:brightness-95 ${toneCls[tone]}`}
+                  >
+                    <span className="flex w-[38px] shrink-0">{l.icon && <IconBookOpen className="h-[18px] w-[22px]" />}</span>
+                    <span className="flex-1 truncate">{l.title}</span>
+                    {l.len && <span className={`ml-3 shrink-0 ${tone === 'active' ? 'text-navy' : ''}`}>{l.len}</span>}
+                  </button>
+                </li>
+              );
+            })}
+          </ul>
+        </section>
+      ))}
+    </nav>
+  );
+}
+
+function VideoPlayer() {
+  const [progress] = useState(332.72 / 1261);
+  return (
+    <div className="relative overflow-hidden rounded-[20px]">
+      <img src={img.classroomVideo} alt="" className="aspect-[1323/884] w-full object-cover" />
+      <div className="absolute inset-x-0 bottom-0 h-[103px] bg-black/30 px-[30px] pt-[35px] fhd:pr-8">
+        <div className="relative h-2 rounded-sm bg-white">
+          <span className="absolute inset-y-0 left-0 rounded-sm bg-teal" style={{ width: `${progress * 100}%` }} />
+          <span
+            className="absolute top-1/2 h-5 w-5 -translate-y-1/2 rounded-full bg-teal"
+            style={{ left: `calc(${progress * 100}% - 17.7px)` }}
+          />
+        </div>
+        <div className="mt-[18px] flex items-center text-white">
+          <button type="button" aria-label="Play" className="w-[66px]">
+            <IconPlay className="h-[18px] w-[18px]" />
+          </button>
+          <span className="text-base font-semibold">0:05 / 03:26</span>
+          <button type="button" aria-label="Fullscreen" className="ml-auto">
+            <img src="/figma/icons/fullscreen.svg" alt="" width="14" height="13" />
+          </button>
+        </div>
+      </div>
+    </div>
+  );
+}
 
 export default function CourseFullView() {
   const { slug } = useParams();
   const course = courses.find((c) => c.slug === slug);
-  const [tab, setTab] = useState('overview');
+  const [current, setCurrent] = useState(0);
   if (!course) return <Navigate to="/courses" replace />;
 
-  const all = modules.flatMap((m) => m.lessons);
-  const done = all.filter((l) => l.done).length;
-  const pct = Math.round((done / all.length) * 100);
-  const current = all.find((l) => l.current) || all[0];
-
   return (
-    <div className="bg-cloud/50">
-      <div className="shell py-8 lg:py-12">
-        <Breadcrumb
-          items={[
-            { label: 'Home', to: '/' },
-            { label: 'Courses', to: '/courses' },
-            { label: course.title, to: `/courses/${course.slug}` },
-            { label: 'Player' },
-          ]}
-        />
+    <div className="flex min-h-screen flex-col bg-white lg:grid lg:grid-cols-[380px_1fr] fhd:grid-cols-[497px_1fr]">
+      {/* ---------- Darslar paneli ---------- */}
+      <aside className="order-2 lg:order-1">
+        <div className="relative z-10 px-5 pt-6 fhd:px-[30px] fhd:pt-[26px]">
+          <Link
+            to={`/courses/${course.slug}`}
+            aria-label="Back to course"
+            className="flex h-[50px] w-[50px] items-center justify-center bg-teal transition hover:bg-teal-dark"
+          >
+            <img src="/figma/icons/arrowBack.svg" alt="" width="26" height="15" />
+          </Link>
+        </div>
+        <div className="-mt-6 fhd:-mt-[26px]">
+          <LessonPanel current={current} onSelect={setCurrent} />
+        </div>
+      </aside>
 
-        <div className="mt-6 grid gap-8 lg:grid-cols-[1fr_380px]">
-          {/* Pleyer */}
-          <div className="min-w-0">
-            <div className="relative overflow-hidden rounded-card bg-navy shadow-pop">
-              <img src={course.image} alt="" className="aspect-video w-full object-cover opacity-70" />
-              <button className="absolute inset-0 flex items-center justify-center" aria-label="Play">
-                <span className="flex h-20 w-20 items-center justify-center rounded-full bg-white shadow-float transition hover:scale-105">
-                  <IconPlay className="ml-1 h-8 w-8 text-cyan" />
-                </span>
-              </button>
+      {/* ---------- Asosiy qism ---------- */}
+      <main className="order-1 min-w-0 bg-sky/20 lg:order-2">
+        <header className="flex flex-col justify-between gap-2 bg-teal px-5 py-6 text-white sm:flex-row sm:items-start fhd:h-[163px] fhd:pb-0 fhd:pl-[60px] fhd:pr-[50px] fhd:pt-[26px]">
+          <div>
+            <Link to={`/courses/${course.slug}`} className="mb-3 inline-flex items-center gap-2 text-sm text-white/90 lg:hidden">
+              <img src="/figma/icons/arrowBack.svg" alt="" width="20" height="11" /> Back to course
+            </Link>
+            <h1 className="text-2xl font-normal text-white sm:text-[32px] fhd:text-[44px] fhd:leading-[66px]">
+              Learn about Adobe XD &amp; Prototyping
+            </h1>
+            <p className="mt-1 text-lg sm:text-2xl fhd:mt-[5px] fhd:leading-9">Introduction about XD</p>
+          </div>
+          <p className="flex items-center gap-2.5 text-lg sm:self-end sm:text-2xl fhd:mb-[29px] fhd:leading-9">
+            <FaIcon name="faClock" className="h-6 w-6" />
+            1 hour
+          </p>
+        </header>
 
-              {/* Boshqaruv paneli */}
-              <div className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-navy/90 to-transparent p-5">
-                <div className="h-1.5 w-full overflow-hidden rounded-full bg-white/25">
-                  <div className="h-full w-1/3 rounded-full bg-teal" />
-                </div>
-                <div className="mt-3 flex items-center justify-between text-sm text-white/85">
-                  <span>4:52 / {current.len}</span>
-                  <span className="flex items-center gap-4">
-                    <button className="transition hover:text-white"><IconChevronLeft className="h-5 w-5" /></button>
-                    <button className="transition hover:text-white"><IconChevronRight className="h-5 w-5" /></button>
-                  </span>
-                </div>
-              </div>
-            </div>
+        <div className="px-5 pb-6 pt-8 sm:px-8 fhd:pb-6 fhd:pl-[50px] fhd:pr-[50px] fhd:pt-[50px]">
+          <VideoPlayer />
 
-            <h1 className="mt-7 text-2xl font-bold text-navy-title sm:text-3xl">{current.title}</h1>
-            <p className="mt-2 text-body">
-              {course.title} · {course.author}
-            </p>
-
-            {/* Tablar */}
-            <div className="mt-8 flex gap-2 border-b border-line">
-              {[
-                { id: 'overview', label: 'Overview' },
-                { id: 'notes', label: 'Notes' },
-                { id: 'qa', label: 'Q&A' },
-                { id: 'files', label: 'Resources' },
-              ].map((t) => (
-                <button
-                  key={t.id}
-                  onClick={() => setTab(t.id)}
-                  className={`-mb-px border-b-2 px-5 py-3 text-sm font-medium transition ${
-                    tab === t.id ? 'border-teal text-teal' : 'border-transparent text-body hover:text-navy'
-                  }`}
-                >
-                  {t.label}
-                </button>
-              ))}
-            </div>
-
-            <div className="mt-6 rounded-card bg-white p-7 shadow-card">
-              {tab === 'overview' && (
-                <div className="flex flex-col gap-4 leading-relaxed text-body">
-                  <p>
-                    In this lesson we sketch three versions of the same screen before committing to any
-                    of them. The point is not to draw well — it is to make the throwing-away cheap.
+          <div className="mt-12 fhd:mt-[90px] fhd:pl-[14px] fhd:pr-[32px]">
+            {fullViewSections.map((s, i) => (
+              <section key={s.title} className={i ? 'mt-8 fhd:mt-[23px]' : ''}>
+                <h2 className="text-2xl font-semibold leading-[1.5] text-navy fhd:text-[30px] fhd:leading-[45px]">{s.title}</h2>
+                {s.paragraphs.map((p, j) => (
+                  <p key={j} className={`break-words text-base leading-[1.5] tracking-[0.02em] text-body fhd:min-h-[108px] fhd:w-[1227px] fhd:text-lg fhd:leading-[27px] ${j ? '' : 'mt-4 fhd:mt-[30px]'}`}>
+                    {p}
                   </p>
-                  <p>
-                    Work along with the video. Pause after the second exercise and post your sketches
-                    in the Q&A tab; you will get feedback from the cohort within a day.
-                  </p>
-                </div>
-              )}
-              {tab === 'notes' && (
-                <textarea
-                  rows={8}
-                  placeholder="Type your notes for this lesson…"
-                  className="field resize-y"
-                />
-              )}
-              {tab === 'qa' && (
-                <div className="flex flex-col gap-5">
-                  {[
-                    { who: 'Adam Levin', q: 'How many sketches is too many before it becomes procrastination?' },
-                    { who: 'Tamara Clarke', q: 'Do you sketch on paper or straight into Figma?' },
-                  ].map((item) => (
-                    <div key={item.who} className="flex gap-4">
-                      <span className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-teal/10 text-teal">
-                        <IconChat className="h-5 w-5" />
-                      </span>
-                      <div>
-                        <p className="font-medium text-navy">{item.who}</p>
-                        <p className="mt-1 text-body">{item.q}</p>
-                      </div>
-                    </div>
-                  ))}
-                </div>
-              )}
-              {tab === 'files' && (
-                <ul className="flex flex-col gap-3">
-                  {['Lesson slides.pdf', 'Sketch template.fig', 'Exercise brief.docx'].map((f) => (
-                    <li key={f} className="flex items-center justify-between rounded-soft border border-line px-5 py-3.5">
-                      <span className="flex items-center gap-3 text-body">
-                        <IconBook className="h-5 w-5 text-teal" /> {f}
-                      </span>
-                      <button className="text-sm font-semibold text-teal hover:underline">Download</button>
-                    </li>
-                  ))}
-                </ul>
-              )}
-            </div>
+                ))}
+              </section>
+            ))}
           </div>
 
-          {/* Kurs mazmuni */}
-          <aside>
-            <div className="sticky top-24 overflow-hidden rounded-card bg-white shadow-card">
-              <div className="border-b border-line p-6">
-                <div className="flex items-center justify-between">
-                  <span className="font-semibold text-navy">Course content</span>
-                  <span className="text-sm text-body">{pct}%</span>
-                </div>
-                <div className="mt-3 h-2 w-full overflow-hidden rounded-full bg-cloud">
-                  <div className="h-full rounded-full bg-teal transition-all" style={{ width: `${pct}%` }} />
-                </div>
-                <p className="mt-2 text-sm text-body">
-                  {done} of {all.length} lessons complete
-                </p>
-              </div>
-
-              <div className="max-h-[520px] overflow-y-auto">
-                {modules.map((m) => (
-                  <div key={m.title}>
-                    <p className="bg-cloud px-6 py-3 text-sm font-semibold text-navy">{m.title}</p>
-                    <ul>
-                      {m.lessons.map((l) => (
-                        <li
-                          key={l.title}
-                          className={`flex items-center gap-3 border-b border-line px-6 py-3.5 text-sm last:border-0 ${
-                            l.current ? 'bg-teal/5' : ''
-                          }`}
-                        >
-                          <span
-                            className={`flex h-6 w-6 shrink-0 items-center justify-center rounded-full ${
-                              l.done ? 'bg-teal text-white' : l.current ? 'bg-teal/20 text-teal' : 'bg-cloud text-lilac'
-                            }`}
-                          >
-                            {l.done ? <IconCheck className="h-3.5 w-3.5" /> : <IconPlay className="h-3 w-3" />}
-                          </span>
-                          <span className={`min-w-0 flex-1 truncate ${l.current ? 'font-medium text-teal' : 'text-body'}`}>
-                            {l.title}
-                          </span>
-                          <span className="shrink-0 text-xs text-lilac">{l.len}</span>
-                        </li>
-                      ))}
-                    </ul>
-                  </div>
-                ))}
-              </div>
-
-              <div className="border-t border-line p-5">
-                <Link to="/meeting" className="btn-primary btn-sm w-full">
-                  Join live session
-                </Link>
+          <article className="mt-10 rounded-[15px] bg-orange/30 p-6 fhd:ml-[10px] fhd:mt-[22px] fhd:h-[225px] fhd:w-[1309px] fhd:px-[30px] fhd:pb-0 fhd:pt-[30px]">
+            <div className="flex items-start gap-5 fhd:gap-5">
+              <img src={fullViewReview.avatar} alt="" className="h-[71px] w-[71px] rounded-lg object-cover" />
+              <div className="-mt-0.5">
+                <p className="text-xl font-semibold leading-9 text-[#2d3436] fhd:text-2xl">{fullViewReview.author}</p>
+                <img src="/figma/icons/stars5.svg" alt="5 stars" width="130" height="22" className="mt-3" />
               </div>
             </div>
-          </aside>
+            <p className="mt-6 break-words text-base leading-[1.5] tracking-[0.02em] text-body fhd:mt-[29px] fhd:w-[1227px] fhd:text-lg fhd:leading-[27px]">
+              {fullViewReview.text}
+            </p>
+          </article>
+
+          <CardRow
+            arrows
+            scrollFhd
+            headClassName="mt-12 fhd:ml-[25px] fhd:mr-[7px] fhd:mt-[58px]"
+            bodyClassName="mt-8 fhd:-mr-[50px] fhd:ml-[17px] fhd:mt-[45px]"
+            head={
+              <h2 className="text-2xl font-medium leading-[1.5] tracking-[0.02em] text-black fhd:mt-[7px] fhd:text-[30px] fhd:leading-[45px]">
+                Student also bought
+              </h2>
+            }
+          >
+            {alsoBought.map((c, i) => (
+              <CourseTile key={i} course={c} />
+            ))}
+          </CardRow>
         </div>
-      </div>
+      </main>
     </div>
   );
 }

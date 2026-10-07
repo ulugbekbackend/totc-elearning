@@ -280,3 +280,27 @@ export const IconWhatsapp = (p) => (
     <path fill="currentColor" d="M12.04 2a9.9 9.9 0 0 0-8.5 14.96L2 22l5.2-1.5A9.9 9.9 0 1 0 12.04 2Zm0 1.9a8 8 0 1 1-4.1 14.88l-.3-.18-3.08.89.9-3-.2-.31A8 8 0 0 1 12.04 3.9Zm4.6 10.3c-.25-.13-1.48-.73-1.71-.81-.23-.09-.4-.13-.56.12-.17.25-.65.81-.8.98-.14.16-.29.19-.54.06-.25-.12-1.06-.39-2.02-1.24-.75-.67-1.25-1.5-1.4-1.75-.14-.25-.01-.38.11-.5.11-.11.25-.29.37-.44.13-.14.17-.25.25-.41.09-.17.05-.31-.02-.44-.06-.12-.56-1.35-.77-1.85-.2-.48-.4-.42-.55-.43h-.48c-.16 0-.43.06-.65.31-.23.25-.86.84-.86 2.05s.88 2.38 1 2.54c.13.17 1.74 2.66 4.22 3.73.59.25 1.05.4 1.4.52.6.19 1.13.16 1.56.1.48-.07 1.48-.6 1.69-1.19.2-.58.2-1.08.15-1.18-.06-.11-.23-.17-.48-.29Z" />
   </svg>
 );
+
+/* Course Full View / Literature — Figma'dagi Font Awesome glif o'rniga (REST eksport limitda edi) */
+export const IconBookOpen = (p) => (
+  <svg viewBox="0 0 24 20" {...base(p)}>
+    <path fill="currentColor" d="M11 3.3C9.2 1.8 6.6 1 3.5 1H1a1 1 0 0 0-1 1v13.5a1 1 0 0 0 1 1h2.5c2.9 0 5.3.8 7 2.2.2.2.5.1.5-.2V3.3Zm2 0v15.2c0 .3.3.4.5.2 1.7-1.4 4.1-2.2 7-2.2H23a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1h-2.5c-3.1 0-5.7.8-7.5 2.3Z" />
+  </svg>
+);
+export const IconStarOutline = (p) => (
+  <svg viewBox="0 0 24 24" {...base(p)}>
+    <path stroke="currentColor" strokeWidth="1.8" strokeLinejoin="round" d="m12 2.8 2.8 5.7 6.3.9-4.6 4.5 1.1 6.3L12 17.2l-5.6 3 1.1-6.3-4.6-4.5 6.3-.9L12 2.8Z" />
+  </svg>
+);
+export const IconEye = (p) => (
+  <svg viewBox="0 0 24 24" {...base(p)}>
+    <path stroke="currentColor" strokeWidth="1.8" d="M1.5 12S5.3 5 12 5s10.5 7 10.5 7-3.8 7-10.5 7S1.5 12 1.5 12Z" />
+    <circle cx="12" cy="12" r="3.2" stroke="currentColor" strokeWidth="1.8" />
+  </svg>
+);
+export const IconPlayCircle = (p) => (
+  <svg viewBox="0 0 24 24" {...base(p)}>
+    <circle cx="12" cy="12" r="9.5" stroke="currentColor" strokeWidth="1.8" />
+    <path fill="currentColor" d="M10 8.3v7.4c0 .4.4.6.7.4l5.6-3.7a.5.5 0 0 0 0-.8l-5.6-3.7a.5.5 0 0 0-.7.4Z" />
+  </svg>
+);

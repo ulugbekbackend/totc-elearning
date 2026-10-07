@@ -42,6 +42,7 @@ export default {
         roboto: ['Roboto', 'ui-sans-serif', 'system-ui', 'sans-serif'],
         // Figmadagi "Our Features" sarlavhalari Nunito Sans'da
         nunito: ['"Nunito Sans"', 'ui-sans-serif', 'system-ui', 'sans-serif'],
+        inter: ['Inter', 'ui-sans-serif', 'system-ui', 'sans-serif'],
       },
       fontSize: {
         // Figmadagi shkala

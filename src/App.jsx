@@ -39,7 +39,6 @@ export default function App() {
           <Route path="/" element={<Landing />} />
           <Route path="/courses" element={<Courses />} />
           <Route path="/courses/:slug" element={<CourseDetail />} />
-          <Route path="/courses/:slug/full" element={<CourseFullView />} />
           <Route path="/courses/literature" element={<LiteratureCourse />} />
           <Route path="/membership" element={<Membership />} />
           <Route path="/checkout" element={<Checkout />} />
@@ -58,6 +57,7 @@ export default function App() {
         <Route path="/login" element={<Login />} />
         <Route path="/register" element={<Register />} />
         <Route path="/meeting" element={<Meeting />} />
+        <Route path="/courses/:slug/full" element={<CourseFullView />} />
 
         <Route path="*" element={<NotFound />} />
       </Routes>

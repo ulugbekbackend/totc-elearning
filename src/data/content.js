@@ -567,3 +567,60 @@ export const educationOffers = Array.from({ length: 3 }, () => ({
   text: 'TOTC’s school management software helps traditional and online schools manage scheduling,',
   image: img.forInstructors,
 }));
+
+/* ============ Course Full View (Figma 77:247) ============ */
+// Figma'dagi qator ranglari: teal (joriy dars), orange/30, sky/30, coral/30
+const tones = ['blue', 'orange', 'blue', 'red'];
+const lessonTitle = 'Lesson 01 : Introduction about XD';
+export const fullViewLessons = [
+  {
+    title: 'Change Simplification',
+    lessons: ['active', 'orange', 'blue', 'red'].map((tone) => ({ title: lessonTitle, len: '30 mins', tone, icon: true })),
+  },
+  {
+    title: 'PRACTICE QUIZ',
+    lessons: Array.from({ length: 12 }, (_, i) => ({ title: lessonTitle, len: '30 mins', tone: tones[i % 4], icon: true })),
+  },
+  {
+    title: 'PRACTICE QUIZ',
+    lessons: Array.from({ length: 16 }, (_, i) => ({ title: lessonTitle, tone: tones[i % 4] })),
+  },
+];
+
+const fvLorem =
+  'Lorem ipsum dolor sit amet, consectetur adi piscing elit, sed do eiusmodadipiscing elit, sed do eiusmodLorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmodadipiscing elit, sed do eiusmodLorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmodadipiscing elit, sed do eiusmodeiusmodadipiscing elit, sed do eiusmod';
+export const fullViewSections = [
+  { title: 'O6 Super Coins on the way', paragraphs: [fvLorem] },
+  { title: 'Who this course is for?', paragraphs: [fvLorem + 'L'] },
+  { title: 'Archievable', paragraphs: [fvLorem + 'LWho this course is for?', fvLorem + 'L'] },
+];
+
+export const fullViewReview = {
+  author: 'Bulkin Simons',
+  avatar: img.avatarLina,
+  text: 'Lorem ipsum dolor sit amet, consectetur adi piscing elit, sed do eiusmodadipiscing elit, sed do eiusmodLorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmodadipiscing elit, sed do eiusmodLorem',
+};
+
+// "Student also bought" — Figma rasmlari: news2, course2, course3, course4
+export const alsoBought = [img.news2, img.course2, img.course3, img.course4].map((image, i) => ({
+  ...marketingArticles[i],
+  image,
+}));
+
+/* ============ Literature course (Figma 119:251) ============ */
+export const literatureAuthor = {
+  name: 'John Anderson',
+  role: 'Assistant Professor at Mcmaster University',
+  bio: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt utlabore et dolore magna aliqua. Ut enum ad minim veniam, quis nostrud',
+  photo: img.literatureAuthor,
+  rating: '4.9 instructor Rating',
+  students: '1,592 Students',
+};
+
+export const literatureTabs = ['About', 'Course', 'Notes', 'Project', 'Podcast', 'Book', 'Review'];
+
+export const literatureBooks = [img.book1, img.book2, img.book3, img.book4, img.book5, img.book2].map((image) => ({
+  image,
+  title: 'All Benefits of PLUS',
+  price: 24,
+}));
