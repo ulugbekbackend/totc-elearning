@@ -475,3 +475,52 @@ export const participants = [
   { name: 'Humbert Holland', photo: img.meetingTile3 },
   { name: 'Patricia Mendoza', photo: img.meetingTile4 },
 ];
+
+/* ============ Course ekrani (Figma "Course" 47:247) ============ */
+const lorem =
+  'Lorem ipsum dolor sit amet, consectetur adipising elit, sed do eiusmod tempor';
+
+// "Welcome back" — davom ettirilayotgan kurslar
+export const courseProgress = [
+  { slug: 'user-experience-design', image: img.news1, done: 5, total: 7 },
+  { slug: 'data-science-basics', image: img.course2, done: 5, total: 7 },
+  { slug: 'academic-writing', image: img.blog1, done: 5, total: 7 },
+].map((c) => ({ ...c, title: 'AWS Certified Solutions Architect', author: 'Lina', avatar: img.avatarLina }));
+
+// "Choice favourite course from top category"
+export const topCategories = [
+  { title: 'Design', icon: 'faPaintBrush', color: '#49BBBD' },
+  { title: 'Development', icon: 'faDesktop', color: '#5B72EE' },
+  { title: 'Development', icon: 'faDatabase', color: '#9DCCFF' },
+  { title: 'Business', icon: 'faBriefcase', color: '#00CBB8' },
+  { title: 'Marketing', icon: 'faSlideshare', color: '#F48C06' },
+  { title: 'Photography', icon: 'faBook', color: '#EE645B' },
+  { title: 'Acting', icon: 'faFilm', color: '#252641' },
+  { title: 'Business', icon: 'faBriefcase', color: '#00CBB8' },
+].map((c) => ({
+  ...c,
+  text: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmodadipiscing elit, sed do eiusmod',
+}));
+
+// Kurs qatorlari — Figma'da har qatorda 1- va 3-kartaning rasmi boshqa
+const tiles = ['user-experience-design', 'data-science-basics', 'academic-writing', 'intro-to-business'].map(
+  (slug, i) => ({
+    slug,
+    image: i % 2 ? img.news1 : img.news2,
+    category: 'Design',
+    duration: '3 Month',
+    title: 'AWS Certified solutions Architect',
+    text: lorem,
+    author: 'Lina',
+    avatar: img.avatarLina,
+    oldPrice: 100,
+    price: 80,
+  })
+);
+
+export const courseRows = {
+  recommended: { title: 'Recommended for you', courses: tiles },
+  choice: { title: 'Get choice of your course', courses: tiles },
+  personal: { title: 'The course in personal development', courses: tiles },
+  viewing: { title: 'Student are viewing', courses: tiles },
+};

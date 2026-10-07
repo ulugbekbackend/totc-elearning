@@ -172,6 +172,7 @@ const FIGMA = {
   avatar4: '/figma/avatar4.webp',
   avatar5: '/figma/avatar5.webp',
   avatar6: '/figma/avatar6.webp',
+  avatarLina: '/figma/avatarLina.webp', // Course ekrani — heroGirl'ning Figma'dagi kesimi
   meetingMain: '/figma/meetingMain.webp',
   meetingTile1: '/figma/meetingTile1.webp',
   meetingTile2: '/figma/meetingTile2.webp',
