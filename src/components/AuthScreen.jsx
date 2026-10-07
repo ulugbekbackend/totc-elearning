@@ -139,7 +139,7 @@ export default function AuthScreen({ mode = 'login' }) {
 
             <button
               type="submit"
-              className={`h-[49px] w-[231px] self-end rounded-[36px] lg:w-[232px] bg-teal text-base font-normal text-white transition hover:bg-teal-dark ${
+              className={`h-[49px] w-[231px] self-center rounded-[36px] lg:self-end lg:w-[232px] bg-teal text-base font-normal text-white transition hover:bg-teal-dark ${
                 isLogin ? 'mt-[62px]' : 'mt-[52px] lg:mt-[55px]'
               }`}
             >
