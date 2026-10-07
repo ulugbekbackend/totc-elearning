@@ -1,7 +1,6 @@
 import { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import img from '../assets/images.js';
-import Logo from './Logo.jsx';
 
 /**
  * Figmadagi 4 ta ekranni qoplaydi:
@@ -11,10 +10,11 @@ import Logo from './Logo.jsx';
  *
  * lg+ (Figma 1440×900) o'lchamlari aniq: rasm kartasi x=41 y=38 737×825 (Register 731),
  * forma ustuni 435px, elementlar orasidagi masofalar Figma koordinatalaridan olingan.
- * Mobil ko'rinish (<lg) hali Figma bilan solishtirilmagan.
+ * Mobil (<lg, Figma 375×876): logotip va qo'shimcha havolalar yo'q, kontent vertikal markazda,
+ * chap chekka 26px, input 317px, tumbler 315px (chapga tekislangan).
  */
 const inputCls =
-  'block h-[54px] w-full rounded-[40px] border border-teal bg-white pl-[31px] pr-14 text-[15px] font-light ' +
+  'block h-[54px] w-full rounded-[40px] border border-teal bg-white pl-[23px] pr-14 lg:pl-[31px] text-[15px] font-light ' +
   'text-black outline-none transition placeholder:text-[#acacac] focus:ring-4 focus:ring-teal/15';
 const labelCls = 'block text-base leading-6 text-black';
 
@@ -29,7 +29,7 @@ export default function AuthScreen({ mode = 'login' }) {
   };
 
   return (
-    <div className="flex min-h-screen bg-[#fffefc] lg:pb-[37px] lg:pl-[41px] lg:pt-[38px]">
+    <div className="flex min-h-screen bg-white lg:bg-[#fffefc] lg:pb-[37px] lg:pl-[41px] lg:pt-[38px]">
       {/* ---------- Yon rasm (faqat lg+) ---------- */}
       <div
         className={`relative hidden shrink-0 overflow-hidden rounded-[29px] lg:block ${
@@ -49,22 +49,19 @@ export default function AuthScreen({ mode = 'login' }) {
 
       {/* ---------- Forma ---------- */}
       <div
-        className={`flex flex-1 flex-col justify-center px-6 py-12 sm:px-12 lg:items-center lg:px-0 lg:py-0 ${
+        className={`flex flex-1 flex-col justify-center px-[26px] py-12 lg:items-center lg:px-0 lg:py-0 ${
           isLogin ? 'lg:pr-[5px]' : ''
         }`}
       >
-        <div className="mx-auto flex w-full max-w-[440px] flex-col lg:mx-0 lg:w-[435px] lg:max-w-none">
-          <div className="mb-8 lg:hidden">
-            <Logo />
-          </div>
+        <div className="flex w-full max-w-[317px] flex-col sm:mx-auto lg:mx-0 lg:w-[435px] lg:max-w-none">
 
           <p className="text-center text-base leading-6 text-black">Welcome to lorem..!</p>
 
           {/* Login / Register tumbler */}
-          <div className="mx-auto mt-6 flex h-[59px] w-[329px] max-w-full items-center justify-between rounded-[33px] bg-teal/60 pl-[13px] pr-3">
+          <div className="mt-6 flex h-[59px] w-[315px] max-w-full items-center justify-between rounded-[33px] bg-teal/60 pl-3 pr-[11px] lg:mx-auto lg:w-[329px] lg:pl-[13px] lg:pr-3">
             <Link
               to="/login"
-              className={`flex h-10 w-[146px] items-center justify-center rounded-full text-base font-medium text-white transition ${
+              className={`flex h-10 w-[140px] items-center justify-center rounded-full text-base font-medium lg:w-[146px] text-white transition ${
                 isLogin ? 'bg-teal' : ''
               }`}
             >
@@ -72,7 +69,7 @@ export default function AuthScreen({ mode = 'login' }) {
             </Link>
             <Link
               to="/register"
-              className={`flex h-10 w-[146px] items-center justify-center rounded-full text-base text-white transition ${
+              className={`flex h-10 w-[140px] items-center justify-center rounded-full text-base text-white lg:w-[146px] transition ${
                 isLogin ? 'font-normal' : 'bg-teal font-medium'
               }`}
             >
@@ -80,7 +77,11 @@ export default function AuthScreen({ mode = 'login' }) {
             </Link>
           </div>
 
-          <p className="mt-[52px] leading-6 text-muted lg:h-[49px] lg:w-[454px]">
+          <p
+            className={`h-[49px] w-[calc(100%+14px)] leading-6 text-muted lg:mt-[52px] lg:w-[454px] ${
+              isLogin ? 'mt-[52px]' : 'mt-[51px]'
+            }`}
+          >
             Lorem Ipsum is simply dummy text of the printing and typesetting industry.
           </p>
 
@@ -110,7 +111,7 @@ export default function AuthScreen({ mode = 'login' }) {
                   type="button"
                   onClick={() => setShow((v) => !v)}
                   aria-label={show ? 'Hide password' : 'Show password'}
-                  className="absolute right-7 top-1/2 -translate-y-1/2"
+                  className="absolute right-[15px] top-1/2 -translate-y-1/2 lg:right-7"
                 >
                   <img
                     src="/figma/icons/eyeOff.svg"
@@ -122,15 +123,15 @@ export default function AuthScreen({ mode = 'login' }) {
             </label>
 
             {isLogin && (
-              <div className="mt-[22px] flex items-end justify-between text-xs font-light leading-[18px] text-black">
-                <label className="flex cursor-pointer items-center gap-2.5">
+              <div className="mt-[22px] flex items-center justify-between text-xs lg:items-end font-light leading-[18px] text-black">
+                <label className="flex cursor-pointer items-center gap-1.5 lg:gap-2.5">
                   <input
                     type="checkbox"
-                    className="relative top-[1.5px] h-[15px] w-[15px] shrink-0 appearance-none border border-black bg-white checked:bg-teal"
+                    className="relative h-3 w-3 shrink-0 lg:top-[1.5px] lg:h-[15px] lg:w-[15px] appearance-none border border-black bg-white checked:bg-teal"
                   />
                   Rememebr me
                 </label>
-                <a href="#" className="pr-[3px] transition hover:text-teal">
+                <a href="#" className="mr-0.5 w-[122px] transition lg:mr-0 lg:w-auto lg:pr-[3px] hover:text-teal">
                   Forgot Password ?
                 </a>
               </div>
@@ -138,19 +139,13 @@ export default function AuthScreen({ mode = 'login' }) {
 
             <button
               type="submit"
-              className={`h-[49px] w-[232px] self-end rounded-[36px] bg-teal text-base font-normal text-white transition hover:bg-teal-dark ${
-                isLogin ? 'mt-[62px]' : 'mt-[55px]'
+              className={`h-[49px] w-[231px] self-end rounded-[36px] lg:w-[232px] bg-teal text-base font-normal text-white transition hover:bg-teal-dark ${
+                isLogin ? 'mt-[62px]' : 'mt-[52px] lg:mt-[55px]'
               }`}
             >
               {isLogin ? 'Login' : 'Register'}
             </button>
           </form>
-
-          <p className="mt-6 text-center lg:hidden">
-            <Link to="/" className="text-sm text-lilac transition hover:text-teal">
-              ← Back to home
-            </Link>
-          </p>
         </div>
       </div>
     </div>
