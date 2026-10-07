@@ -655,17 +655,7 @@ export const sharePosts = ['sky', 'orange', 'coral'].map((tone) => ({
   tone,
 }));
 
-/* ============ Blog (Figma 34:89) va Blog detail (30:64) ============ */
-export const blogFeatured = {
-  slug: 'future-of-hybrid-classrooms',
-  author: 'Themadbrains',
-  category: 'inspiration',
-  title: 'Why Swift UI Should Be on the Radar of Every Mobile Developer',
-  excerpt:
-    'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempos Lorem ipsum dolor sitamet, consectetur adipiscing elit, sed do eiusmod tempor',
-  image: img.news1,
-};
-
+/* ============ Blog (Figma 34:89) — maqolalar src/data/blog.js da ============ */
 export const readingCategories = [
   { label: 'UX/UI', image: img.news3 },
   { label: 'React', image: img.blog3 },
@@ -673,28 +663,8 @@ export const readingCategories = [
   { label: 'JavaScript', image: img.blog1 },
 ];
 
-export const relatedBlogs = [img.forInstructors, img.news1].map((image, i) => ({
-  slug: posts[i].slug,
-  image,
-  title: 'Class adds $30 million to its balance sheet for a Zoom-friendly edtech solution',
-  excerpt: 'Class, launched less than a year ago by Blackboard co-founder Michael Chasen, integrates exclusively...',
-  author: 'Lina',
-  avatar: img.avatarLina,
-  views: '251,232',
-}));
-
 // Blog sahifasidagi "Marketing Articles" — Figma rasmlari: news2, news3, news1, news4
 export const blogMarketing = [img.news2, img.news3, img.news1, img.news4].map((image, i) => ({
   ...marketingArticles[i],
   image,
 }));
-
-const totcAbout =
-  'TOTC is a platform that allows educators to create online classes whereby they can store the course materials online; manage assignments, quizzes and exams; monitor due dates; grade results and provide students with feedback all in one place.';
-// Figma'dagi uchta paragraf guruhi (oraliq 30px)
-export const blogBody = [
-  [totcAbout],
-  [totcAbout, totcAbout, 'TOTC is a platform '],
-  [totcAbout, 'TOTC is a platform that allows educators to create online classes whereby they can store the course materials online; manage '],
-];
-export const blogTags = ['affordable', 'Stunning', 'making', 'madbrawns'];

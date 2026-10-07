@@ -1,5 +1,6 @@
 import { Link } from 'react-router-dom';
-import { blogFeatured as featured, readingCategories, blogMarketing } from '../data/content.js';
+import { readingCategories, blogMarketing } from '../data/content.js';
+import { featuredPost as featured, blogPosts } from '../data/blog.js';
 import { CardRow, CourseTile, RowHeader } from '../components/CourseBlocks.jsx';
 import { RelatedBlogs } from '../components/BlogBlocks.jsx';
 
@@ -18,7 +19,10 @@ export default function Blog() {
         <div className={`${frame} grid items-center gap-10 lg:grid-cols-2 fhd:flex fhd:items-start fhd:justify-between fhd:pl-[114px] fhd:pr-[163px]`}>
           <div className="fhd:w-[688px] fhd:pt-[77px]">
             <p className="text-lg text-black sm:text-2xl fhd:leading-9">
-              By {featured.author} in <span className="font-bold text-teal">{featured.category}</span>
+              By {featured.publisher ?? featured.author} in{' '}
+              <Link to={`/blog/all?category=${encodeURIComponent(featured.category)}`} className="font-bold text-teal hover:underline">
+                {featured.category.toLowerCase()}
+              </Link>
             </p>
             <h1 className="mt-4 text-3xl font-semibold leading-[1.5] text-navy-title sm:text-[40px] fhd:ml-1 fhd:mt-6 fhd:w-[670px] fhd:text-[44px] fhd:leading-[66px]">
               {featured.title}
@@ -53,7 +57,7 @@ export default function Blog() {
             {readingCategories.map((c) => (
               <Link
                 key={c.label}
-                to="/search"
+                to={`/blog/all?category=${encodeURIComponent(c.label)}`}
                 className="group relative block h-[280px] w-[260px] shrink-0 snap-start overflow-hidden rounded-[20px] lg:w-[calc((100%-72px)/4)] fhd:h-[327px] fhd:w-[356px]"
               >
                 <img src={c.image} alt="" className="absolute inset-0 h-full w-full object-cover transition duration-500 group-hover:scale-105" />
@@ -67,7 +71,8 @@ export default function Blog() {
         </div>
       </section>
 
-      <RelatedBlogs />
+      {/* Figma'da bu yerda yangiliklar ("Class adds $30 million…") turadi */}
+      <RelatedBlogs posts={blogPosts.filter((p) => p.category === 'News')} />
 
       {/* ---------- Marketing Articles ---------- */}
       <section className="py-14 lg:py-20 fhd:pb-[171px] fhd:pt-[80px]">
