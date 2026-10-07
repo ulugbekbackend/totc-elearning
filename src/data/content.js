@@ -624,3 +624,33 @@ export const literatureBooks = [img.book1, img.book2, img.book3, img.book4, img.
   title: 'All Benefits of PLUS',
   price: 24,
 }));
+
+/* ============ Course Calendar (Figma 68:428, 62:245, 74:231) ============ */
+const calLorem =
+  'Lorem ipsum dolor sit amet, consectetur adi piscing elit, sed do eiusmodadipiscing elit, sed do eiusmodLorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmodadipiscing elit, sed do eiusmodLorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmodadipiscing elit, sed do eiusmodeiusmodadipiscing elit, sed do eiusmod';
+export const shareIntro = [calLorem + 'Lorem' + calLorem.replace('eiusmod', 'eiusmod') + 'Lorem', 'eiusmodLorem dolor sit amet, consectetur adipiscing'];
+
+// Kun ko'rinishidagi soatlar (2 PM … 6 PM) va voqealar (soat, 24 soatlik)
+export const calendarDayHours = [14, 15, 16, 17, 18];
+export const courseEvents = [
+  { date: '2021-09-12', title: 'Adobe XD Live Class', start: 14, end: 15, tone: 'coral' },
+];
+
+// "Create new event" maydonlaridagi Figma matnlari — placeholder sifatida
+export const createEventDefaults = {
+  name: 'Adobe XD Auto - Animate : Your Guide to Creating',
+  start: 'September 24, 2017 07:59 am',
+  end: 'September 24, 2017 07:59 am',
+  location: '2118 Thornridge Cir, Syracuse, Connecticut 35624',
+  notification: '30 mins',
+  email: 'jessica.hansome@example.com',
+  description:
+    'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmodadipiscing elit, sed do eiusmodLorem ipsum dolor sit amet, consectetur Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmodadipiscing elit, sed do eiusmodLorem ipsum dolor sit amet, consectetur ',
+};
+
+export const sharePosts = ['sky', 'orange', 'coral'].map((tone) => ({
+  title: 'O6 Super Coins on the way',
+  subtitle: 'Lorem ipsum dolor sit amet, consectetur adi',
+  text: calLorem + 'L',
+  tone,
+}));

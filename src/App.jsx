@@ -2,7 +2,6 @@ import { Routes, Route, useLocation } from 'react-router-dom';
 import { useEffect } from 'react';
 
 import SiteLayout from './layouts/SiteLayout.jsx';
-import AppLayout from './layouts/AppLayout.jsx';
 
 import Landing from './pages/Landing.jsx';
 import Login from './pages/Login.jsx';
@@ -13,6 +12,7 @@ import CourseFullView from './pages/CourseFullView.jsx';
 import LiteratureCourse from './pages/LiteratureCourse.jsx';
 import CourseCalendar from './pages/CourseCalendar.jsx';
 import CourseCalendarCreate from './pages/CourseCalendarCreate.jsx';
+import CourseCalendarShare from './pages/CourseCalendarShare.jsx';
 import Meeting from './pages/Meeting.jsx';
 import Membership from './pages/Membership.jsx';
 import Checkout from './pages/Checkout.jsx';
@@ -47,17 +47,14 @@ export default function App() {
           <Route path="/search" element={<Search />} />
         </Route>
 
-        {/* Ichki (login qilingan) ekranlar — soddalashtirilgan sidebar layout */}
-        <Route element={<AppLayout />}>
-          <Route path="/calendar" element={<CourseCalendar />} />
-          <Route path="/calendar/create" element={<CourseCalendarCreate />} />
-        </Route>
-
         {/* To'liq ekranli ekranlar */}
         <Route path="/login" element={<Login />} />
         <Route path="/register" element={<Register />} />
         <Route path="/meeting" element={<Meeting />} />
         <Route path="/courses/:slug/full" element={<CourseFullView />} />
+        <Route path="/calendar" element={<CourseCalendar />} />
+        <Route path="/calendar/create" element={<CourseCalendarCreate />} />
+        <Route path="/calendar/share" element={<CourseCalendarShare />} />
 
         <Route path="*" element={<NotFound />} />
       </Routes>
