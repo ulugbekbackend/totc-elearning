@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { useParams, Navigate } from 'react-router-dom';
 import img from '../assets/images.js';
-import { posts, blogFeatured, blogBody, blogTags } from '../data/content.js';
+import { posts, news, blogFeatured, blogBody, blogTags } from '../data/content.js';
 import { RelatedBlogs } from '../components/BlogBlocks.jsx';
 
 /**
@@ -14,7 +14,7 @@ const frame = 'shell fhd:max-w-[1920px] fhd:px-0';
 
 export default function BlogDetail() {
   const { slug } = useParams();
-  const post = posts.find((p) => p.slug === slug);
+  const post = [...posts, ...news].find((p) => p.slug === slug);
   const [following, setFollowing] = useState(false);
   if (!post) return <Navigate to="/blog" replace />;
 
