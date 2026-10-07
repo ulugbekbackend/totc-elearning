@@ -524,3 +524,46 @@ export const courseRows = {
   personal: { title: 'The course in personal development', courses: tiles },
   viewing: { title: 'Student are viewing', courses: tiles },
 };
+
+/* ============ Course Detail (Figma 46:217) ============ */
+export const courseReviewSummary = {
+  score: 4,
+  label: 'Top Raiting',
+  // Figma'da beshala qator bir xil (333 / 432)
+  bars: [5, 4, 3, 2, 1].map((stars) => ({ stars, pct: (333 / 432) * 100 })),
+};
+
+const reviewText =
+  'Class, launched less than a year ago by Blackboard co-founder Michael Chasen, integrates exclusively...';
+export const courseReviews = [
+  { author: 'Lina', avatar: img.avatarLina, rating: 5, ago: '3 Month', text: reviewText },
+  { author: 'Lina', avatar: img.avatarLina, rating: 5, ago: '3 Month', text: reviewText },
+];
+
+export const courseIncludes = [
+  { icon: 'faCertificate', text: 'Money Back Guarantee' },
+  { icon: 'faCamera', text: 'Access on all devices' },
+  { icon: 'faFileAlt', text: 'Certification of completion' },
+  { icon: 'faChartBar', text: '32 Moduls' },
+];
+
+// "Marketing Articles" — Figma'dagi rasmlar tartibi
+export const marketingArticles = [img.news2, img.blog1, img.course1, img.news1].map((image, i) => ({
+  slug: ['user-experience-design', 'data-science-basics', 'academic-writing', 'intro-to-business'][i],
+  image,
+  category: 'Design',
+  duration: '3 Month',
+  title: 'AWS Certified solutions Architect',
+  text: 'Lorem ipsum dolor sit amet, consectetur adipising elit, sed do eiusmod tempor',
+  author: 'Lina',
+  avatar: img.avatarLina,
+  oldPrice: 100,
+  price: 80,
+}));
+
+export const educationOffers = Array.from({ length: 3 }, () => ({
+  discount: '50%',
+  title: 'FOR INSTRUCTORS',
+  text: 'TOTC’s school management software helps traditional and online schools manage scheduling,',
+  image: img.forInstructors,
+}));

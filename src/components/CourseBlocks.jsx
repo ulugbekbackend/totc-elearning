@@ -159,13 +159,13 @@ export function CourseTile({ course }) {
 }
 
 /* ---------- Qator sarlavhasi + "See all" ---------- */
-export function RowHeader({ title, to = '/search', link = 'See all' }) {
+export function RowHeader({ title, to = '/search', link = 'See all', className = '', linkClassName = '' }) {
   return (
-    <div className="flex items-end justify-between gap-4">
+    <div className={`flex items-end justify-between gap-4 ${className}`}>
       <h2 className="text-2xl font-medium leading-[1.5] tracking-[0.02em] text-black fhd:text-[30px] fhd:leading-[45px]">
         {title}
       </h2>
-      <Link to={to} className="shrink-0 text-base font-bold leading-[30px] text-teal transition hover:text-teal-dark fhd:mr-[3px] fhd:text-xl">
+      <Link to={to} className={`shrink-0 text-base font-bold leading-[30px] text-teal transition hover:text-teal-dark fhd:mr-[3px] fhd:text-xl ${linkClassName}`}>
         {link}
       </Link>
     </div>
