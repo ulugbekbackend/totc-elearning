@@ -1,5 +1,5 @@
 import { Link } from 'react-router-dom';
-import { IconStar, IconCheck } from './Icons.jsx';
+import { IconStar } from './Icons.jsx';
 
 /* ---------- Bo'lim sarlavhasi ---------- */
 export function SectionHeading({
@@ -168,48 +168,53 @@ export function PostCard({ post, featured = false }) {
   );
 }
 
-/* ---------- Narx kartasi ---------- */
+/* ---------- Narx kartasi ----------
+ * Figma "Plan" (MemberShip 42:385, 370×536): ichki chekinish 32px, belgi doirasi 32px
+ * (rangi tarifga qarab), ajratilgan tarif — 16px radius va soya, qolganlari — 8px.
+ */
 export function PriceCard({ plan }) {
+  const free = plan.price === 0;
   return (
     <article
-      className={`relative flex flex-col rounded-card p-8 transition lg:p-10 ${
+      className={`flex w-full max-w-[370px] flex-col bg-white p-8 font-inter text-[#2D3436] fhd:h-[536px] fhd:w-[370px] ${
         plan.highlight
-          ? 'bg-teal text-white shadow-pop lg:-my-4 lg:py-14'
-          : 'bg-white text-navy shadow-card'
+          ? 'rounded-2xl shadow-[0_16px_24px_rgba(38,50,56,0.08),0_8px_8px_rgba(38,50,56,0.12)]'
+          : 'rounded-lg shadow-[0_8px_24px_rgba(38,50,56,0.06)] lg:shadow-none'
       }`}
     >
-      {plan.highlight && (
-        <span className="absolute right-8 top-8 rounded-pill bg-white/20 px-4 py-1 text-xs font-bold uppercase tracking-wider">
-          Popular
-        </span>
-      )}
-      <h3 className={`text-xl font-semibold ${plan.highlight ? 'text-white' : 'text-navy-title'}`}>
-        {plan.name}
-      </h3>
-      <p className={`mt-2 text-sm ${plan.highlight ? 'text-white/80' : 'text-body'}`}>
-        {plan.tagline}
+      <div className="flex items-center justify-between gap-4">
+        <h3 className="text-lg font-bold leading-8 tracking-[0.2px] text-teal">{plan.label}</h3>
+        {plan.highlight && (
+          <span className="flex h-8 w-[90px] items-center justify-center rounded-full border border-[#6C5CE7] text-xs font-extrabold uppercase tracking-[2.5px]">
+            best!
+          </span>
+        )}
+      </div>
+
+      <p className="mt-4 text-5xl font-bold leading-[56px] tracking-[-1px]">
+        {free ? 'Free' : `$${plan.price}`}
+        <span className="text-xs font-extrabold uppercase tracking-[2.5px]"> / {plan.unit}</span>
       </p>
 
-      <p className="mt-6 flex items-end gap-1">
-        <span className="text-[44px] font-bold leading-none">${plan.price}</span>
-        <span className={plan.highlight ? 'text-white/80' : 'text-body'}>/{plan.period}</span>
-      </p>
-
-      <ul className="mt-8 flex flex-1 flex-col gap-3.5">
+      <ul className="mb-4 mt-6 flex flex-col gap-4">
         {plan.features.map((f) => (
-          <li key={f} className="flex items-start gap-3 text-[15px]">
-            <IconCheck
-              className={`mt-0.5 h-5 w-5 shrink-0 ${plan.highlight ? 'text-white' : 'text-teal'}`}
-            />
-            <span className={plan.highlight ? 'text-white/90' : 'text-body'}>{f}</span>
+          <li key={f} className="flex min-h-10 items-center gap-4 text-lg leading-8">
+            <span className="flex h-8 w-8 shrink-0 items-center justify-center rounded-full" style={{ background: plan.tone }}>
+              <svg viewBox="0 0 22.4 22.4" className="h-[22.4px] w-[22.4px]" fill="none" aria-hidden="true">
+                <path d="M6.7 11.1l3 2.9 6-6.2" stroke="#2D3436" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+              </svg>
+            </span>
+            {f}
           </li>
         ))}
       </ul>
 
       <Link
-        to="/checkout"
-        className={`btn btn-md mt-9 w-full ${
-          plan.highlight ? 'bg-white text-teal hover:bg-white/90' : 'bg-teal text-white hover:bg-teal-dark'
+        to={free ? '/register' : `/checkout?plan=${plan.slug}`}
+        className={`mt-auto flex h-16 shrink-0 items-center justify-center rounded-2xl font-bold transition ${
+          plan.highlight
+            ? 'bg-teal text-2xl leading-9 tracking-[0.25px] text-white hover:bg-teal-dark'
+            : 'border border-[#ADADAD] text-lg leading-8 tracking-[0.2px] text-teal hover:border-teal hover:bg-teal/5'
         }`}
       >
         {plan.cta}

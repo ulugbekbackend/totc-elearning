@@ -13,7 +13,7 @@ const links = [
   { to: '/search', label: 'About Us' },
 ];
 
-const USER_PAGES = ['/courses', '/blog'];
+const USER_PAGES = ['/courses', '/blog', '/membership'];
 
 /* ---------- Profil menyusi (avatar + "Lina" + strelka) ---------- */
 function ProfileMenu() {

@@ -1,6 +1,6 @@
 import { Link } from 'react-router-dom';
 import { courseProgress, topCategories, courseRows } from '../data/content.js';
-import { CardRow, ProgressCard, CategoryCard, CourseTile, RowHeader } from '../components/CourseBlocks.jsx';
+import { CardRow, ProgressCard, CategoryCard, CourseTile, RowHeader, CoachingBanner } from '../components/CourseBlocks.jsx';
 
 /**
  * Figma "Course" (47:247, 1920 kadr). fhd: da bo'limlar balandligi va chekinishlari 1:1:
@@ -76,21 +76,7 @@ export default function Courses() {
         </div>
 
         <div className={`${frame} mt-6 lg:mt-12 fhd:mt-[90px] fhd:pl-[119px]`}>
-          <div className="flex flex-col items-center rounded-[37px] bg-navy px-6 py-12 text-center text-white sm:px-12 fhd:h-[459px] fhd:w-[1682px] fhd:px-0 fhd:pb-0 fhd:pt-[70px]">
-            <h2 className="text-2xl font-semibold leading-[1.5] text-white sm:text-3xl fhd:text-4xl fhd:leading-[54px]">
-              Online coaching lessons for remote learning.
-            </h2>
-            <p className="mt-5 max-w-[1259px] text-base leading-[1.8] tracking-[0.02em] sm:text-xl fhd:mt-[30px] fhd:text-2xl fhd:leading-[43.2px]">
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempos Lorem ipsum dolor
-              sitamet, consectetur adipiscing elit, sed do eiusmod tempor
-            </p>
-            <Link
-              to="/membership"
-              className="mt-10 flex h-[63px] w-[236px] items-center justify-center rounded-xl bg-teal text-base font-bold text-white transition hover:bg-teal-dark fhd:mt-[73px]"
-            >
-              Start learning now
-            </Link>
-          </div>
+          <CoachingBanner />
         </div>
 
         <div className={`${frame} mt-14 lg:mt-20 fhd:mt-[90px] fhd:pl-[139px] fhd:pr-[135px]`}>

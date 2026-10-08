@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useSearchParams } from 'react-router-dom';
 import { courses, plans } from '../data/content.js';
 import { Breadcrumb } from '../components/ui.jsx';
 import { IconCheck, IconChevronLeft } from '../components/Icons.jsx';
@@ -8,7 +8,9 @@ export default function Checkout() {
   const [pay, setPay] = useState('card');
   const [done, setDone] = useState(false);
   const item = courses[0];
-  const plan = plans[1];
+  const [params] = useSearchParams();
+  // Membership'dagi tanlangan tarif (?plan=individual); bepul tarif to'lovga tushmaydi
+  const plan = plans.find((p) => p.slug === params.get('plan') && p.price > 0) ?? plans[1];
 
   const subtotal = plan.price;
   const discount = 0;
@@ -155,7 +157,7 @@ export default function Checkout() {
               <div className="min-w-0">
                 <p className="font-medium leading-snug text-navy">{plan.name} plan</p>
                 <p className="mt-1 text-sm text-body">{plan.tagline}</p>
-                <p className="mt-1 text-sm text-teal">Billed monthly</p>
+                <p className="mt-1 text-sm text-teal">Billed per {plan.unit}</p>
               </div>
             </div>
 

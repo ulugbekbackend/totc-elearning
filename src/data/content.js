@@ -405,50 +405,58 @@ export const exploreShelves = [
 ];
 
 /* ============ Membership tariflari ============ */
+// Figma "MemberShip" (42:319) — uchta tarif; tone — belgi doirasining rangi
 export const plans = [
   {
+    slug: 'starter',
     name: 'Starter',
+    label: 'Starter',
     tagline: 'For a single teacher trying things out',
     price: 0,
-    period: 'mo',
-    cta: 'Start for free',
-    features: [
-      'Up to 30 students per class',
-      '40-minute sessions',
-      'Basic attendance tracking',
-      'Community support',
-    ],
+    unit: 'forever',
+    tone: '#C2C2C2',
+    cta: 'Try for free',
+    features: ['Up to 30 students', '40-minute live classes', 'Attendance tracking'],
   },
   {
-    name: 'Classroom',
-    tagline: 'For schools running daily classes',
-    price: 29,
-    period: 'mo',
-    cta: 'Choose Classroom',
+    slug: 'individual',
+    name: 'Individual',
+    label: '👤 Individual',
+    tagline: 'For a teacher running daily classes',
+    price: 24,
+    unit: 'month',
+    tone: '#FDCB6E',
+    cta: 'Choose Individual',
     highlight: true,
     features: [
-      'Up to 300 students per class',
-      'Unlimited session length',
-      'Gradebook and live quizzes',
-      'Breakout rooms and podium',
+      'Up to 300 students',
+      'Unlimited class length',
+      'Gradebook & live quizzes',
+      'Breakout rooms & podium',
       'One-on-one discussions',
-      'Priority email support',
     ],
   },
   {
-    name: 'Campus',
-    tagline: 'For multi-campus institutions',
-    price: 89,
-    period: 'mo',
-    cta: 'Talk to sales',
-    features: [
-      'Everything in Classroom',
-      'Multiple campuses and rooms',
-      'Online billing and contracts',
-      'SSO and admin roles',
-      'Dedicated success manager',
-    ],
+    slug: 'corporate',
+    name: 'Corporate',
+    label: '👥 Corporate',
+    tagline: 'For schools — billed per editor seat',
+    price: 12,
+    unit: 'editor',
+    tone: '#55EFC4',
+    cta: 'Choose Corporate',
+    features: ['Everything in Individual', 'Multiple campuses', 'Online billing & contracts', 'SSO and admin roles'],
   },
+];
+
+/* ============ Membership — o'quvchilar fikri ============ */
+export const studentReviews = [
+  { name: 'Eveny Howard', photo: img.avatar1, text: 'Live quizzes keep my whole class awake. I see who is stuck before the lesson is even over.' },
+  { name: 'Adam Levin', photo: img.avatar2, text: 'Breakout rooms work like real group tables. My students finally talk to each other online.' },
+  { name: 'Tamara Clarke', photo: img.avatar3, text: 'Attendance and grades land in one place, so parent meetings take minutes instead of hours.' },
+  { name: 'Humbert Holland', photo: img.avatar4, text: 'I record every class and share it the same evening. Nobody misses a topic after a sick day.' },
+  { name: 'Patricia Mendoza', photo: img.avatar5, text: 'One-on-one rooms let me help a student privately without stopping the rest of the class.' },
+  { name: 'Gloria Rose', photo: img.avatar6, text: 'We moved three campuses to TOTC in a week. Billing and schedules just worked from day one.' },
 ];
 
 /* ============ Dars jadvali ============ */
