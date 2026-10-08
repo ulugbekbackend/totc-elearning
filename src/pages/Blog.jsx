@@ -1,137 +1,90 @@
-import { useMemo, useState } from 'react';
 import { Link } from 'react-router-dom';
-import { posts, news } from '../data/content.js';
-import { PageHero, PostCard } from '../components/ui.jsx';
-import { IconSearch, IconClock } from '../components/Icons.jsx';
+import { readingCategories, blogMarketing } from '../data/content.js';
+import { featuredPost as featured, blogPosts } from '../data/blog.js';
+import { CardRow, CourseTile, RowHeader } from '../components/CourseBlocks.jsx';
+import { RelatedBlogs } from '../components/BlogBlocks.jsx';
 
-const tags = ['All', 'EDUCATION', 'TEACHING', 'PRODUCT', 'CULTURE'];
+/**
+ * Figma "Blog page" (34:89, 1920 kadr). fhd: da 1:1 —
+ * hero (sky/20, 667px; matn x=114, rasm 779×527 x=978) · "Reading blog list" (4 × 356×327) ·
+ * Related Blog (1268px) · Marketing Articles (4 × 374×617).
+ */
+const frame = 'shell fhd:max-w-[1920px] fhd:px-0';
 
 export default function Blog() {
-  const [tag, setTag] = useState('All');
-  const [q, setQ] = useState('');
-
-  const [featured, ...rest] = posts;
-
-  const list = useMemo(() => {
-    let out = rest.filter((p) => tag === 'All' || p.tag === tag);
-    if (q.trim()) {
-      const n = q.toLowerCase();
-      out = out.filter((p) => p.title.toLowerCase().includes(n) || p.excerpt.toLowerCase().includes(n));
-    }
-    return out;
-  }, [tag, q]);
-
   return (
     <>
-      <PageHero
-        title="News, resources and things we learned the hard way"
-        subtitle="Written by the teachers and engineers building TOTC."
-        crumbs={[{ label: 'Home', to: '/' }, { label: 'Blog' }]}
-      >
-        <div className="flex w-full max-w-xl items-center gap-3 rounded-pill bg-white p-2 shadow-float">
-          <span className="pl-4 text-lilac"><IconSearch className="h-5 w-5" /></span>
-          <input
-            value={q}
-            onChange={(e) => setQ(e.target.value)}
-            placeholder="Search articles"
-            className="min-w-0 flex-1 bg-transparent py-2.5 text-navy outline-none placeholder:text-lilac"
-          />
-        </div>
-      </PageHero>
-
-      {/* Asosiy maqola */}
-      <section className="shell py-14 lg:py-20">
-        <Link to={`/blog/${featured.slug}`} className="group grid items-center gap-10 lg:grid-cols-2">
-          <div className="overflow-hidden rounded-card">
-            <img
-              src={featured.image}
-              alt={featured.title}
-              className="aspect-[16/10] w-full object-cover transition duration-500 group-hover:scale-105"
-            />
-          </div>
-          <div>
-            <span className="inline-block rounded-pill bg-teal/10 px-5 py-2 text-xs font-bold uppercase tracking-wider text-teal">
-              {featured.tag}
-            </span>
-            <h2 className="mt-5 text-[28px] font-bold leading-tight text-navy-title group-hover:text-teal sm:text-[36px]">
-              {featured.title}
-            </h2>
-            <p className="mt-4 text-lg leading-relaxed text-body">{featured.excerpt}</p>
-            <div className="mt-6 flex items-center gap-4 text-sm text-body">
-              <span className="font-medium text-navy">{featured.author}</span>
-              <span className="h-1 w-1 rounded-full bg-lilac" />
-              <span>{featured.date}</span>
-              <span className="h-1 w-1 rounded-full bg-lilac" />
-              <span className="flex items-center gap-1.5">
-                <IconClock className="h-4 w-4" /> {featured.readTime}
-              </span>
-            </div>
-            <span className="mt-6 inline-block font-semibold text-teal">Read the article →</span>
-          </div>
-        </Link>
-      </section>
-
-      {/* Teglar + ro'yxat */}
-      <section className="shell pb-16 lg:pb-24">
-        <div className="no-scrollbar -mx-5 flex gap-2 overflow-x-auto border-b border-line px-5 pb-6 lg:mx-0 lg:px-0">
-          {tags.map((t) => (
-            <button
-              key={t}
-              onClick={() => setTag(t)}
-              className={`shrink-0 rounded-pill px-6 py-2.5 text-sm font-medium transition ${
-                tag === t ? 'bg-teal text-white' : 'bg-cloud text-body hover:bg-teal/10 hover:text-teal'
-              }`}
-            >
-              {t === 'All' ? 'All' : t.charAt(0) + t.slice(1).toLowerCase()}
-            </button>
-          ))}
-        </div>
-
-        <div className="mt-10 grid gap-8 sm:grid-cols-2 lg:grid-cols-3">
-          {list.map((p) => (
-            <article key={p.slug} className="group flex flex-col">
-              <Link to={`/blog/${p.slug}`} className="overflow-hidden rounded-card">
-                <img
-                  src={p.image}
-                  alt={p.title}
-                  loading="lazy"
-                  className="aspect-[16/10] w-full object-cover transition duration-500 group-hover:scale-105"
-                />
+      {/* ---------- Hero: tanlangan maqola ---------- */}
+      <section className="bg-sky/20 py-12 lg:py-16 fhd:mt-[2px] fhd:h-[667px] fhd:py-0">
+        <div className={`${frame} grid items-center gap-10 lg:grid-cols-2 fhd:flex fhd:items-start fhd:justify-between fhd:pl-[114px] fhd:pr-[163px]`}>
+          <div className="fhd:w-[688px] fhd:pt-[77px]">
+            <p className="text-lg text-black sm:text-2xl fhd:leading-9">
+              By {featured.publisher ?? featured.author} in{' '}
+              <Link to={`/blog/all?category=${encodeURIComponent(featured.category)}`} className="font-bold text-teal hover:underline">
+                {featured.category.toLowerCase()}
               </Link>
-              <span className="mt-5 inline-block self-start rounded-pill bg-cloud px-4 py-1.5 text-[11px] font-bold uppercase tracking-wider text-teal">
-                {p.tag}
-              </span>
-              <h3 className="mt-3 text-lg font-semibold leading-snug text-navy-title">
-                <Link to={`/blog/${p.slug}`} className="transition group-hover:text-teal">{p.title}</Link>
-              </h3>
-              <p className="mt-2 line-clamp-2 text-sm leading-relaxed text-body">{p.excerpt}</p>
-              <div className="mt-4 flex items-center gap-3 text-xs text-body">
-                <span>{p.author}</span>
-                <span className="h-1 w-1 rounded-full bg-lilac" />
-                <span>{p.date}</span>
-                <span className="h-1 w-1 rounded-full bg-lilac" />
-                <span>{p.readTime}</span>
-              </div>
-            </article>
-          ))}
-        </div>
-
-        {list.length === 0 && (
-          <div className="rounded-card bg-cloud py-20 text-center">
-            <p className="text-lg font-medium text-navy">Maqola topilmadi</p>
+            </p>
+            <h1 className="mt-4 text-3xl font-semibold leading-[1.5] text-navy-title sm:text-[40px] fhd:ml-1 fhd:mt-6 fhd:w-[670px] fhd:text-[44px] fhd:leading-[66px]">
+              {featured.title}
+            </h1>
+            <p className="mt-4 text-base leading-[1.8] tracking-[0.02em] text-body sm:text-xl sm:leading-[1.8] fhd:mt-[14px] fhd:w-[704px] fhd:text-2xl fhd:leading-[1.8]">
+              {featured.excerpt}
+            </p>
+            <Link
+              to={`/blog/${featured.slug}`}
+              className="mt-8 flex h-[63px] w-[236px] items-center justify-center rounded-xl bg-teal text-base font-bold text-white transition hover:bg-teal-dark fhd:mt-6"
+            >
+              Start learning now
+            </Link>
           </div>
-        )}
+          <Link
+            to={`/blog/${featured.slug}`}
+            className="group relative block overflow-hidden rounded-[20px] fhd:mt-[70px] fhd:h-[527px] fhd:w-[779px] fhd:shrink-0"
+          >
+            <img src={featured.image} alt="" className="aspect-[779/527] h-full w-full object-cover transition duration-500 group-hover:scale-105" />
+            <span className="absolute inset-0 bg-navy-deep/10" />
+          </Link>
+        </div>
       </section>
 
-      {/* Press */}
-      <section className="bg-cloud/60 py-14 lg:py-20">
-        <div className="shell">
-          <h2 className="text-2xl font-bold text-navy-title sm:text-3xl">In the press</h2>
-          <div className="mt-8 grid gap-8 sm:grid-cols-2">
-            {news.slice(1).map((n) => (
-              <PostCard key={n.slug} post={n} />
+      {/* ---------- Reading blog list ---------- */}
+      <section className="py-14 lg:py-20 fhd:pb-[80px] fhd:pt-[80px]">
+        <div className={`${frame} fhd:pl-[120px]`}>
+          <h2 className="text-2xl font-bold leading-[1.5] text-black/80 fhd:text-[30px] fhd:leading-[45px]">Reading blog list</h2>
+        </div>
+        <div className={`${frame} mt-8 fhd:mt-[26px] fhd:pl-[110px]`}>
+          <CardRow gap="gap-6 fhd:gap-[76px]">
+            {readingCategories.map((c) => (
+              <Link
+                key={c.label}
+                to={`/blog/all?category=${encodeURIComponent(c.label)}`}
+                className="group relative block h-[280px] w-[260px] shrink-0 snap-start overflow-hidden rounded-[20px] lg:w-[calc((100%-72px)/4)] fhd:h-[327px] fhd:w-[356px]"
+              >
+                <img src={c.image} alt="" className="absolute inset-0 h-full w-full object-cover transition duration-500 group-hover:scale-105" />
+                <span className="absolute inset-0 bg-navy-deep/10" />
+                <span className="absolute inset-x-[60px] bottom-[34px] flex h-[63px] items-center justify-center rounded-xl bg-white/70 text-xl font-bold text-black/80 sm:text-2xl">
+                  {c.label}
+                </span>
+              </Link>
             ))}
-          </div>
+          </CardRow>
+        </div>
+      </section>
+
+      {/* Figma'da bu yerda yangiliklar ("Class adds $30 million…") turadi */}
+      <RelatedBlogs posts={blogPosts.filter((p) => p.category === 'News')} />
+
+      {/* ---------- Marketing Articles ---------- */}
+      <section className="py-14 lg:py-20 fhd:pb-[171px] fhd:pt-[80px]">
+        <div className={`${frame} fhd:pl-[120px] fhd:pr-[89px]`}>
+          <RowHeader title="Marketing Articles" />
+        </div>
+        <div className={`${frame} mt-8 fhd:mt-[50px] fhd:pl-[137px]`}>
+          <CardRow>
+            {blogMarketing.map((c, i) => (
+              <CourseTile key={i} course={c} />
+            ))}
+          </CardRow>
         </div>
       </section>
     </>

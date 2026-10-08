@@ -654,3 +654,17 @@ export const sharePosts = ['sky', 'orange', 'coral'].map((tone) => ({
   text: calLorem + 'L',
   tone,
 }));
+
+/* ============ Blog (Figma 34:89) — maqolalar src/data/blog.js da ============ */
+export const readingCategories = [
+  { label: 'UX/UI', image: img.news3 },
+  { label: 'React', image: img.blog3 },
+  { label: 'PHP', image: img.blog2 },
+  { label: 'JavaScript', image: img.blog1 },
+];
+
+// Blog sahifasidagi "Marketing Articles" — Figma rasmlari: news2, news3, news1, news4
+export const blogMarketing = [img.news2, img.news3, img.news1, img.news4].map((image, i) => ({
+  ...marketingArticles[i],
+  image,
+}));

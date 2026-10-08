@@ -18,6 +18,7 @@ import Membership from './pages/Membership.jsx';
 import Checkout from './pages/Checkout.jsx';
 import Blog from './pages/Blog.jsx';
 import BlogDetail from './pages/BlogDetail.jsx';
+import BlogList from './pages/BlogList.jsx';
 import Search from './pages/Search.jsx';
 import NotFound from './pages/NotFound.jsx';
 
@@ -43,6 +44,7 @@ export default function App() {
           <Route path="/membership" element={<Membership />} />
           <Route path="/checkout" element={<Checkout />} />
           <Route path="/blog" element={<Blog />} />
+          <Route path="/blog/all" element={<BlogList />} />
           <Route path="/blog/:slug" element={<BlogDetail />} />
           <Route path="/search" element={<Search />} />
         </Route>

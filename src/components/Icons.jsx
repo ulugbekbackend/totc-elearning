@@ -304,3 +304,8 @@ export const IconPlayCircle = (p) => (
     <path fill="currentColor" d="M10 8.3v7.4c0 .4.4.6.7.4l5.6-3.7a.5.5 0 0 0 0-.8l-5.6-3.7a.5.5 0 0 0-.7.4Z" />
   </svg>
 );
+export const IconEyeSolid = (p) => (
+  <svg viewBox="0 0 24 24" {...base(p)}>
+    <path fill="currentColor" fillRule="evenodd" d="M12 4.5C6.5 4.5 2.4 8.1 1 12c1.4 3.9 5.5 7.5 11 7.5s9.6-3.6 11-7.5c-1.4-3.9-5.5-7.5-11-7.5Zm0 12a4.5 4.5 0 1 0 0-9 4.5 4.5 0 0 0 0 9Zm0-2.5a2 2 0 1 0 0-4 2 2 0 0 0 0 4Z" />
+  </svg>
+);
